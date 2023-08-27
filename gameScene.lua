@@ -15,12 +15,12 @@ local cellSize = display.actualContentWidth * SCREEN_PERCENTAGE / GRID_SIZE
 local running = false
 local stepCount = 0
 local stepText
-local stepTextOptions = { text = "", fontSize = 15, }
+local stepTextOptions = { text = "0", fontSize = 15, }
 
 
 local cells = {}
 
-local function addCells()
+local function createGameBoard(group)
     
     local gameBoard = display.newGroup() -- Create a display group for the grid
 
@@ -43,8 +43,16 @@ local function addCells()
 
     -- Display & position step text 
     stepText = display.newText(stepTextOptions)
-    stepText.x = (display.actualContentWidth * SCREEN_PERCENTAGE) + (cellSize / 2) + 10
-    stepText.y = gameBoard.y + (cellSize * GRID_SIZE) - (cellSize / 2) + 10
+    gameBoard:insert(stepText) 
+
+    stepText.x = (GRID_SIZE * cellSize) - cellSize / 1.5
+    stepText.y = (GRID_SIZE * cellSize) - cellSize / 4
+
+    -- Insert the Step Text into the GameBoard group
+
+
+    -- Insert the GameBoard into the Scene
+    group:insert(gameBoard) 
 
 end
 
@@ -57,7 +65,7 @@ function resetCells()
         end
     end
     stepCount = 0
-    stepText.text = ""
+    stepText.text = stepCount
 end
 
 
@@ -88,10 +96,7 @@ local function getCellsNeighbours(cellIndex)
 end
 
 
-function stopSimulation()
-    print("Stopped")
-    running = false
-end
+
 
 
 function startSimulation()
@@ -174,11 +179,17 @@ function startSimulation()
 end
 
 
+function stopSimulation()
+    print("Stopped")
+    running = false
+end
 
 
-local function addUserInterface()
+
+local function addUserInterface(group)
     local uiGroup = display.newGroup()
     local ui = UI.createUI(uiGroup)
+    group:insert(uiGroup) -- Insert UI into Scene
 end
 
 
@@ -197,7 +208,7 @@ function scene:create(event)
     -- Create display objects (e.g., background, buttons, text)
 
     -- UI
-    addUserInterface()
+    addUserInterface(sceneGroup)
     
     -- Background
     local background = display.newRect(sceneGroup, display.contentCenterX, display.contentCenterY, display.actualContentWidth, display.actualContentHeight)
@@ -211,8 +222,8 @@ function scene:create(event)
         font = native.systemFont,
         fontSize = 24,
     }
-    local helloText = display.newText(textOptions)
-    sceneGroup:insert(helloText)
+    local titleText = display.newText(textOptions)
+    sceneGroup:insert(titleText)
 end
 
 
@@ -225,7 +236,7 @@ function scene:show(event)
         -- Called when the scene is about to come on screen
     elseif phase == "did" then
         -- Called when the scene is now on screen
-        addCells()
+        createGameBoard(sceneGroup)
     end
 end
 
