@@ -3,9 +3,9 @@ local composer = require("composer")
 local scene = composer.newScene()
 
 local Cell = require("cell")
-local UI = require("userInterface")
+local UI = require("gameUserInterface")
 local speedModule = require("simulationSpeed")
----------------------------------------
+-----------------------------------------------------
 
 
 local SCREEN_PERCENTAGE = 0.7 -- Percentage of the screen width for the gameBoard
@@ -17,12 +17,16 @@ local stepCount = 0
 local stepText
 local stepTextOptions = { text = "0", fontSize = 15, }
 
+-----------------------------------------------------
+
+
+
 
 local cells = {}
 
 local function createGameBoard(group)
     
-    local gameBoard = display.newGroup() -- Create a display group for the grid
+    gameBoard = display.newGroup() -- Create a display group for the grid
 
     for row = 1, GRID_SIZE do
         for col = 1, GRID_SIZE do
@@ -44,12 +48,8 @@ local function createGameBoard(group)
     -- Display & position step text 
     stepText = display.newText(stepTextOptions)
     gameBoard:insert(stepText) 
-
     stepText.x = (GRID_SIZE * cellSize) - cellSize / 1.5
     stepText.y = (GRID_SIZE * cellSize) - cellSize / 4
-
-    -- Insert the Step Text into the GameBoard group
-
 
     -- Insert the GameBoard into the Scene
     group:insert(gameBoard) 
@@ -187,9 +187,8 @@ end
 
 
 local function addUserInterface(group)
-    local uiGroup = display.newGroup()
-    local ui = UI.createUI(uiGroup)
-    group:insert(uiGroup) -- Insert UI into Scene
+    ui = UI.createUI()
+    group:insert(ui) -- Insert UI into Scene
 end
 
 
@@ -199,22 +198,22 @@ end
 
 
 
+--===============================================================================================================================||
+--================================================- SCENE EVENT FUNCTIONS -======================================================||
+--===============================================================================================================================||
+
+
 
 
 -- CREATE SCENE
 function scene:create(event)
     local sceneGroup = self.view
 
-    -- Create display objects (e.g., background, buttons, text)
-
-    -- UI
-    addUserInterface(sceneGroup)
-    
     -- Background
     local background = display.newRect(sceneGroup, display.contentCenterX, display.contentCenterY, display.actualContentWidth, display.actualContentHeight)
     background:setFillColor(1, 0, 1)
 
-    -- Text
+    -- Title Text
     local textOptions = {
         text = "Game of Life!",
         x = display.contentWidth / 2,
@@ -222,8 +221,14 @@ function scene:create(event)
         font = native.systemFont,
         fontSize = 24,
     }
-    local titleText = display.newText(textOptions)
+    titleText = display.newText(textOptions)
     sceneGroup:insert(titleText)
+
+    -- Gameboard (Grid)
+    createGameBoard(sceneGroup)
+
+    -- User Interface (Game Scene)
+    addUserInterface(sceneGroup)
 end
 
 
@@ -236,7 +241,6 @@ function scene:show(event)
         -- Called when the scene is about to come on screen
     elseif phase == "did" then
         -- Called when the scene is now on screen
-        createGameBoard(sceneGroup)
     end
 end
 
@@ -250,6 +254,8 @@ function scene:hide(event)
         -- Called when the scene is on screen and is about to move off screen
     elseif phase == "did" then
         -- Called when the scene has moved off screen
+        stopSimulation()
+        resetCells()
     end
 end
 

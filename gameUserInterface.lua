@@ -65,6 +65,11 @@ end
 
 local function onLoadButtonTap(self)
     print("Load")
+    local transitionOptions = {
+        effect = "fromTop",
+        time = 500,
+    }
+    composer.gotoScene("savesScene", transitionOptions)
 end
 
 ---------------------------------------------------------------|
@@ -72,7 +77,7 @@ end
 
 
 
-function UI.createUI(sceneGroup)
+function UI.createUI()
     
     local uiGroup = display.newGroup()
     
@@ -207,7 +212,16 @@ function UI.createUI(sceneGroup)
 
     --------------------------------------------------------------------|
    
-    sceneGroup:insert(uiGroup) -- Insert the uiGroup into the sceneGroup
+    -- Insert Buttons into UIGroup
+    uiGroup:insert(startButton) 
+    uiGroup:insert(clearButton) 
+    uiGroup:insert(speedUpButton) 
+    uiGroup:insert(speedDownButton) 
+    uiGroup:insert(speedText) 
+    uiGroup:insert(saveButton) 
+    uiGroup:insert(loadButton) 
+
+    return uiGroup
 
 end
 

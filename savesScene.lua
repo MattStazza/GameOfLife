@@ -1,8 +1,24 @@
 -- Import the necessary libraries -----
 local composer = require("composer")
 local scene = composer.newScene()
+
+local UI = require("savesUserInterface")
 ---------------------------------------
 
+
+
+
+local function addUserInterface(group)
+    ui = UI.createUI()
+    group:insert(ui)
+end
+
+
+
+
+--===============================================================================================================================||
+--================================================- SCENE EVENT FUNCTIONS -======================================================||
+--===============================================================================================================================||
 
 
 
@@ -10,20 +26,23 @@ local scene = composer.newScene()
 function scene:create(event)
     local sceneGroup = self.view
 
-    -- Example background
+    -- Background
     local background = display.newRect(sceneGroup, display.contentCenterX, display.contentCenterY, display.actualContentWidth, display.actualContentHeight)
-    background:setFillColor(0.5, 0.5, 0.5)
+    background:setFillColor(0, 0.75, 1)
 
-    -- Example text
+    -- Title Text
     local textOptions = {
-        text = "Splash Screen!",
-        x = display.contentCenterX,
-        y = display.contentCenterY,
+        text = "Load a Preset!",
+        x = display.contentWidth / 2,
+        y = 35, -- 35px down from top top
         font = native.systemFont,
         fontSize = 24,
     }
-    local helloText = display.newText(textOptions)
-    sceneGroup:insert(helloText)
+    local infoText = display.newText(textOptions)
+    sceneGroup:insert(infoText)
+
+    -- User Interface (Saves Scene)
+    addUserInterface(sceneGroup)
 end
 
 
