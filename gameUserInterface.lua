@@ -1,6 +1,6 @@
 local composer = require("composer")
 local widget = require("widget")
-local speedModule = require("simulationSpeed")
+local appData = require("data")
 -------------------------------------------------------------
 
 local UI = {}
@@ -42,34 +42,33 @@ local function onClearButtonTap(self)
 end
 
 local function onSpeedUpButtonTap(self)
-    speedModule.speed = speedModule.speed + 1
-    if speedModule.speed > 10 then
-        speedModule.speed = 10  -- Clamp speed at 10
+    appData.speed = appData.speed + 1
+    if appData.speed > 10 then
+        appData.speed = 10  -- Clamp speed at 10
     end 
-    speedText.text = "x" .. speedModule.speed
-    print(speedModule.speed)
+    speedText.text = "x" .. appData.speed
+    print(appData.speed)
 end
 
 local function onSpeedDownButtonTap(self)
-    speedModule.speed = speedModule.speed - 1
-    if speedModule.speed < 1 then
-        speedModule.speed = 1  -- Clamp speed at 0
+    appData.speed = appData.speed - 1
+    if appData.speed < 1 then
+        appData.speed = 1  -- Clamp speed at 0
     end  
-    speedText.text = "x" .. speedModule.speed
-    print(speedModule.speed)
+    speedText.text = "x" .. appData.speed
+    print(appData.speed)
 end
 
 local function onSaveButtonTap(self)
     print("Save")
+    local transitionOptions = { effect = "fromBottom", time = 500, }
+    composer.gotoScene("saveScene", transitionOptions)
 end
 
 local function onLoadButtonTap(self)
     print("Load")
-    local transitionOptions = {
-        effect = "fromTop",
-        time = 500,
-    }
-    composer.gotoScene("savesScene", transitionOptions)
+    local transitionOptions = { effect = "fromTop", time = 500, }
+    composer.gotoScene("loadScene", transitionOptions)
 end
 
 ---------------------------------------------------------------|

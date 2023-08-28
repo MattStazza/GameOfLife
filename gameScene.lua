@@ -4,13 +4,10 @@ local scene = composer.newScene()
 
 local Cell = require("cell")
 local UI = require("gameUserInterface")
-local speedModule = require("simulationSpeed")
+local appData = require("data")
 -----------------------------------------------------
 
-
-local SCREEN_PERCENTAGE = 0.7 -- Percentage of the screen width for the gameBoard
-local GRID_SIZE = 5
-local cellSize = display.actualContentWidth * SCREEN_PERCENTAGE / GRID_SIZE
+local cellSize = display.actualContentWidth * appData.screenPercentage / appData.gridSize
 
 local running = false
 local stepCount = 0
@@ -28,13 +25,13 @@ local function createGameBoard(group)
     
     gameBoard = display.newGroup() -- Create a display group for the grid
 
-    for row = 1, GRID_SIZE do
-        for col = 1, GRID_SIZE do
+    for row = 1, appData.gridSize do
+        for col = 1, appData.gridSize do
             local x = (col - 1) * cellSize
             local y = (row - 1) * cellSize
             local newCell = Cell.new(x, y, cellSize)
 
-            local index = (row - 1) * GRID_SIZE + col
+            local index = (row - 1) * appData.gridSize + col
             cells[index] = newCell -- Insert the cell into the cells table
 
             gameBoard:insert(newCell) -- Insert the cell into the gameBoard group
@@ -42,14 +39,14 @@ local function createGameBoard(group)
     end
 
     -- Center the gameBoard
-    gameBoard.x = display.contentCenterX - (cellSize * (GRID_SIZE - 1)) / 2
-    gameBoard.y = (display.contentCenterY - (cellSize * (GRID_SIZE - 1))) + cellSize
+    gameBoard.x = display.contentCenterX - (cellSize * (appData.gridSize - 1)) / 2
+    gameBoard.y = display.contentCenterY - gameBoard.height / 1.5
 
     -- Display & position step text 
     stepText = display.newText(stepTextOptions)
     gameBoard:insert(stepText) 
-    stepText.x = (GRID_SIZE * cellSize) - cellSize / 1.5
-    stepText.y = (GRID_SIZE * cellSize) - cellSize / 4
+    stepText.x = (appData.gridSize * cellSize) - 10
+    stepText.y = (appData.gridSize * cellSize) + 10
 
     -- Insert the GameBoard into the Scene
     group:insert(gameBoard) 
@@ -73,8 +70,8 @@ end
 local function getCellsNeighbours(cellIndex)
     local neighbours = {}
     
-    local row, col = math.ceil(cellIndex / GRID_SIZE), cellIndex % GRID_SIZE
-    col = (col == 0) and GRID_SIZE or col
+    local row, col = math.ceil(cellIndex / appData.gridSize), cellIndex % appData.gridSize
+    col = (col == 0) and appData.gridSize or col
     
     local offsets = {
         { -1, -1 }, { -1, 0 }, { -1, 1 },
@@ -85,10 +82,10 @@ local function getCellsNeighbours(cellIndex)
     for _, offset in ipairs(offsets) do
         local newRow, newCol = row + offset[1], col + offset[2]
         
-        newRow = (newRow - 1) % GRID_SIZE + 1
-        newCol = (newCol - 1) % GRID_SIZE + 1
+        newRow = (newRow - 1) % appData.gridSize + 1
+        newCol = (newCol - 1) % appData.gridSize + 1
         
-        local newIndex = (newRow - 1) * GRID_SIZE + newCol
+        local newIndex = (newRow - 1) * appData.gridSize + newCol
         table.insert(neighbours, newIndex)
     end
     
@@ -170,7 +167,7 @@ function startSimulation()
         end
 
         updateCellStates()   
-        timer.performWithDelay(1000 / speedModule.speed, simulationStep) 
+        timer.performWithDelay(1000 / appData.speed, simulationStep) 
 
     end
 

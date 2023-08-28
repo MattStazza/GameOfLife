@@ -2,7 +2,7 @@
 local composer = require("composer")
 local scene = composer.newScene()
 
-local UI = require("savesUserInterface")
+local UI = require("loadUserInterface")
 ---------------------------------------
 
 
@@ -41,7 +41,7 @@ function scene:create(event)
     local infoText = display.newText(textOptions)
     sceneGroup:insert(infoText)
 
-    -- User Interface (Saves Scene)
+    -- User Interface (Load Scene)
     addUserInterface(sceneGroup)
 end
 
