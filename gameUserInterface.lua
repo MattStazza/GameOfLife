@@ -6,8 +6,8 @@ local appData = require("data")
 local UI = {}
 
 -- CONSTANTS
-local BUTTON_WIDTH = 100    
-local BUTTON_HEIGHT = 30
+local BUTTON_WIDTH = appData.buttonWidth    
+local BUTTON_HEIGHT = appData.buttonHeight
 
 
 
@@ -84,8 +84,8 @@ function UI.createUI()
 
     -- START/STOP BUTTON --
     startButton = widget.newButton({
-        width = BUTTON_WIDTH,    
-        height = BUTTON_HEIGHT,
+        width = appData.buttonWidth ,    
+        height = appData.buttonHeight,
         label = "Start",
         fontSize = 16,
         labelColor = { default={1,1,1}, over={0.5,0.5,0.5} },
@@ -98,8 +98,8 @@ function UI.createUI()
 
    -- CLEAR BUTTON -- 
    local clearButton = widget.newButton({
-        width = BUTTON_WIDTH,    
-        height = BUTTON_HEIGHT,
+        width = appData.buttonWidth ,    
+        height = appData.buttonHeight,
         label = "Clear",
         fontSize = 16,
         labelColor = { default={1,1,1}, over={0.5,0.5,0.5} },
@@ -115,8 +115,8 @@ function UI.createUI()
 
     -- SPEED UP BUTTON -- 
    local speedUpButton = widget.newButton({
-        width = BUTTON_WIDTH / 4,    
-        height = BUTTON_HEIGHT,
+        width = appData.buttonWidth  / 4,    
+        height = appData.buttonHeight,
         label = "+",
         fontSize = 32,
         labelColor = { default={0,0,0}, over={0.5,0.5,0.5} },
@@ -129,8 +129,8 @@ function UI.createUI()
 
     -- SPEED DOWN BUTTON -- 
     local speedDownButton = widget.newButton({
-        width = BUTTON_WIDTH / 4,    
-        height = BUTTON_HEIGHT,
+        width = appData.buttonWidth  / 4,    
+        height = appData.buttonHeight,
         label = "-",
         fontSize = 32,
         labelColor = { default={0,0,0}, over={0.5,0.5,0.5} },
@@ -143,12 +143,12 @@ function UI.createUI()
 
     -- SAVE BUTTON -- 
     local saveIcon = display.newImage("SaveIcon.png")
-    saveIcon.width = BUTTON_WIDTH / 4
-    saveIcon.height = BUTTON_WIDTH / 4
+    saveIcon.width = appData.buttonWidth  / 4
+    saveIcon.height = appData.buttonWidth  / 4
 
     local saveButton = widget.newButton({
-        width = BUTTON_WIDTH / 4,    
-        height = BUTTON_HEIGHT,
+        width = appData.buttonWidth  / 4,    
+        height = appData.buttonHeight,
         onRelease = function(event)
             onSaveButtonTap(self)
         end
@@ -161,12 +161,12 @@ function UI.createUI()
 
    -- LOAD BUTTON -- 
    local loadIcon = display.newImage("LoadIcon.png")
-   loadIcon.width = BUTTON_WIDTH / 4
-   loadIcon.height = BUTTON_WIDTH / 4
+   loadIcon.width = appData.buttonWidth  / 4
+   loadIcon.height = appData.buttonWidth  / 4
 
    local loadButton = widget.newButton({
-       width = BUTTON_WIDTH / 4,    
-       height = BUTTON_HEIGHT,
+       width = appData.buttonWidth  / 4,    
+       height = appData.buttonHeight,
        onRelease = function(event)
            onLoadButtonTap(self)
        end
@@ -189,25 +189,25 @@ function UI.createUI()
     
     -- Set the position of the button
     clearButton.x = display.contentWidth / 2
-    clearButton.y = bottomY - BUTTON_HEIGHT * 1.25
+    clearButton.y = bottomY - appData.buttonHeight * 1.25
 
     startButton.x = display.contentWidth / 2
-    startButton.y = bottomY - (BUTTON_HEIGHT * 2.5)
+    startButton.y = bottomY - (appData.buttonHeight * 2.5)
 
-    speedUpButton.x = (display.contentWidth / 2) + BUTTON_WIDTH / 2.75
-    speedUpButton.y = bottomY - (BUTTON_HEIGHT * 4)
+    speedUpButton.x = (display.contentWidth / 2) + appData.buttonWidth  / 2.75
+    speedUpButton.y = bottomY - (appData.buttonHeight * 4)
 
     speedText.x = display.contentWidth / 2
-    speedText.y = bottomY - (BUTTON_HEIGHT * 4)
+    speedText.y = bottomY - (appData.buttonHeight * 4)
 
-    speedDownButton.x = (display.contentWidth / 2) - BUTTON_WIDTH / 2.75
-    speedDownButton.y = bottomY - (BUTTON_HEIGHT * 4)
+    speedDownButton.x = (display.contentWidth / 2) - appData.buttonWidth  / 2.75
+    speedDownButton.y = bottomY - (appData.buttonHeight * 4)
 
-    saveButton.x = BUTTON_WIDTH / 4 
-    saveButton.y = bottomY - BUTTON_HEIGHT / 1.5
+    saveButton.x = appData.buttonWidth  / 4 
+    saveButton.y = bottomY - appData.buttonHeight / 1.5
     
-    loadButton.x = display.contentWidth - BUTTON_WIDTH / 4
-    loadButton.y = bottomY - BUTTON_HEIGHT / 1.5
+    loadButton.x = display.contentWidth - appData.buttonWidth  / 4
+    loadButton.y = bottomY - appData.buttonHeight / 1.5
 
     --------------------------------------------------------------------|
    

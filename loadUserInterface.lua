@@ -1,15 +1,9 @@
 local composer = require("composer")
 local widget = require("widget")
+local appData = require("data")
 -------------------------------------------------------------
 
 local UI = {}
-
--- CONSTANTS
-local BUTTON_WIDTH = 100    
-local BUTTON_HEIGHT = 30
-
-
-
 
 --------------- BUTTON FUNCTIONS ---------------------------|
 
@@ -40,8 +34,8 @@ function UI.createUI()
 
     -- LOAD BUTTON --
     loadButton = widget.newButton({
-        width = BUTTON_WIDTH,    
-        height = BUTTON_HEIGHT,
+        width = appData.buttonWidth  ,    
+        height = appData.buttonHeight,
         label = "Load",
         fontSize = 16,
         labelColor = { default={1,1,1}, over={0.5,0.5,0.5} },
@@ -55,8 +49,8 @@ function UI.createUI()
 
     -- CLOSE BUTTON -- 
    local closeButton = widget.newButton({
-    width = BUTTON_WIDTH,    
-    height = BUTTON_HEIGHT,
+    width = appData.buttonWidth  ,    
+    height = appData.buttonHeight,
     label = "Close",
     fontSize = 16,
     labelColor = { default={1,1,1}, over={0.5,0.5,0.5} },
@@ -78,10 +72,10 @@ function UI.createUI()
     
     -- Set the position of the button
     closeButton.x = display.contentWidth / 2
-    closeButton.y = bottomY - BUTTON_HEIGHT * 1.25
+    closeButton.y = bottomY - appData.buttonHeight * 1.25
 
     loadButton.x = display.contentWidth / 2
-    loadButton.y = bottomY - (BUTTON_HEIGHT * 2.5)
+    loadButton.y = bottomY - (appData.buttonHeight * 2.5)
 
     --------------------------------------------------------------------|
    

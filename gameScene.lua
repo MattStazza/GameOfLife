@@ -2,9 +2,9 @@
 local composer = require("composer")
 local scene = composer.newScene()
 
+local appData = require("data")
 local Cell = require("cell")
 local UI = require("gameUserInterface")
-local appData = require("data")
 -----------------------------------------------------
 
 local cellSize = display.actualContentWidth * appData.screenPercentage / appData.gridSize
@@ -44,9 +44,10 @@ local function createGameBoard(group)
 
     -- Display & position step text 
     stepText = display.newText(stepTextOptions)
+    stepText.x = (appData.gridSize * cellSize) - (cellSize / 2) - 10
+    stepText.y = (appData.gridSize * cellSize) - (cellSize / 2) + 15
+    
     gameBoard:insert(stepText) 
-    stepText.x = (appData.gridSize * cellSize) - 10
-    stepText.y = (appData.gridSize * cellSize) + 10
 
     -- Insert the GameBoard into the Scene
     group:insert(gameBoard) 
@@ -214,7 +215,7 @@ function scene:create(event)
     local textOptions = {
         text = "Game of Life!",
         x = display.contentWidth / 2,
-        y = 35, -- 35px down from top top
+        y = 25, -- down from top top
         font = native.systemFont,
         fontSize = 24,
     }

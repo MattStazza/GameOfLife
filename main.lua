@@ -10,4 +10,4 @@ end
 composer.gotoScene("splashscreenScene")
 
 -- Go to Game Scene after 3sec
-timer.performWithDelay(1000, goToGameScene)
+timer.performWithDelay(500, goToGameScene)

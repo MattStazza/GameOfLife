@@ -34,7 +34,7 @@ function scene:create(event)
     local textOptions = {
         text = "Load a Preset!",
         x = display.contentWidth / 2,
-        y = 35, -- 35px down from top top
+        y = 25, -- down from top top
         font = native.systemFont,
         fontSize = 24,
     }

@@ -7,11 +7,10 @@ local Cell = require("cell")
 local UI = require("saveUserInterface")
 ---------------------------------------
 
-local cellSize = display.actualContentWidth * appData.screenPercentage / appData.gridSize
+local cellSize
 local cells = {}
 
 -----------------------------------------------------
-
 
 
 local function addUserInterface(group)
@@ -21,6 +20,12 @@ end
 
 local function createBoard(group)
     
+    cellSize = display.actualContentWidth * appData.screenPercentage / appData.gridSize
+    
+    -- Remove current board before making the new board
+    display.remove(board)
+    board = nil
+
     board = display.newGroup() -- Create a display group for the grid
 
     for row = 1, appData.gridSize do
@@ -38,18 +43,13 @@ local function createBoard(group)
 
     -- Center the Board
     board.x = display.contentCenterX - (cellSize * (appData.gridSize - 1)) / 2
-    board.y = (display.contentCenterY - (cellSize * (appData.gridSize - 1))) + cellSize
+    board.y = display.contentCenterY - board.height / 1.5
 
     -- Insert the Board into the Scene
     group:insert(board) 
 
 end
 
-local function resetBoard()
-    for index, cell in ipairs(cells) do
-        makeDead(cell)
-    end
-end
 
 
 
@@ -65,13 +65,13 @@ function scene:create(event)
 
     -- Background
     local background = display.newRect(sceneGroup, display.contentCenterX, display.contentCenterY, display.actualContentWidth, display.actualContentHeight)
-    background:setFillColor(0.25, 1, 0.25)
+    background:setFillColor(0, 1, 0.5)
 
     -- Title Text
     local textOptions = {
-        text = "Save a Preset!",
+        text = "Create a Preset!",
         x = display.contentWidth / 2,
-        y = 35, -- 35px down from top top
+        y = 25, -- down from top top
         font = native.systemFont,
         fontSize = 24,
     }
@@ -81,8 +81,7 @@ function scene:create(event)
     -- User Interface (Save Scene)
     addUserInterface(sceneGroup)
 
-    -- Board for editing/saving (Save Scene)
-    createBoard(sceneGroup)
+    resetDigits(saveScene)
 end
 
 
@@ -93,6 +92,8 @@ function scene:show(event)
 
     if phase == "will" then
         -- Called when the scene is about to come on screen
+        -- Board for editing/saving (Save Scene)
+        createBoard(sceneGroup)
     elseif phase == "did" then
         -- Called when the scene is now on screen
     end
@@ -108,7 +109,6 @@ function scene:hide(event)
         -- Called when the scene is on screen and is about to move off screen
     elseif phase == "did" then
         -- Called when the scene has moved off screen
-        resetBoard()
     end
 end
 
