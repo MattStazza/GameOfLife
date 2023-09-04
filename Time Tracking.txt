@@ -1,0 +1,122 @@
+Time Tracking:
+
+
+
+Start Date & Time
+1) 19th/Aug/2023 - 4:35pm
+2) 20th/Aug/2023 - 10:45am
+3) 20th/Aug/2023 - 6:45pm
+4) 22nd/Aug/2023 - 7:30pm
+5) 27th/AUg/2023 - 12:30pm
+6) 28th/Aug/2023 - 6:30pm
+7) 29th/Aug/2023 - 6:30pm
+
+
+
+
+Stop Date & Time
+1) 19th/Aug/2023 - 5:22pm
+2) 20th/Aug/2023 - 1:02pm
+3) 20th/Aug/2023 - 10:15pm
+4) 22nd/Aug/2023 - 10:15pm
+5) 27th/AUg/2023 - 2:30pm
+6) 28th/Aug/2023 - 7:30pm
+7) 29th/Aug/2023 - 9:00pm
+
+
+
+Time Taken
+1) 47 minutes
+2) 137 minutes (2.3hrs)
+3) 210 minutes (3.5hrs)
+4) 165 minutes (2.75hrs)
+5) 120 minutes (2hrs)
+6) 60mins (1hr)
+7) 150mins (2.5hrs)
+
+
+
+
+Lines of Code (LOD)
+1) 4 files:
+	main.lua = 13
+	gameScene.lua = 101
+	splashscreenScene.lua = 76
+	cell.lua = 31
+	TOTAL: 221 L.O.C
+(with lots of white space)
+
+2) 5 files:
+	main.lua = 13
+	gameScene.lua = 126
+	splashscreenScene.lua = 76
+	cell.lua = 49
+	userInterface.lua = 93
+	TOTAL: 357 L.O.C
+(with lots of white space)
+
+3) 6 files:
+	main.lua = 13
+	gameScene.lua = 167
+	splashscreenScene.lua = 76
+	cell.lua = 49
+	userInterface.lua = 218
+	simulationSpeed.lua = 5
+	TOTAL: 528 L.O.C
+(with lots of white space)
+
+
+4) 6 files:
+	main.lua = 13
+	gameScene.lua = 246
+	splashscreenScene.lua = 76
+	cell.lua = 49
+	userInterface.lua = 216
+	simulationSpeed.lua = 5
+	TOTAL: 605 L.O.C
+(with lots of white space)
+
+
+5) 8 files:
+	main.lua = 13
+	gameScene.lua = 279
+	gameUserInterface.lua = 229
+	splashscreenScene.lua = 74
+	cell.lua = 49
+	simulationSpeed.lua = 5
+	savesScene = 93
+	savesUserInterface = 74
+	TOTAL: 816  L.O.C
+(with lots of white space)
+
+
+6) 10 files:
+	main.lua = 13
+	gameScene.lua = 276
+	gameUserInterface.lua = 228
+	saveScene = 134
+	savesUserInterface = 151
+	loadScene = 93
+	loadUserInterface = 102
+	splashscreenScene.lua = 74
+	cell.lua = 49
+	data.lua (simulation speed renamed) = 7
+	TOTAL: 1127 L.O.C
+(with lots of white space)
+
+
+7) 10 files:
+	main.lua = 13
+	gameScene.lua = 277
+	gameUserInterface.lua = 228
+	saveScene = 134
+	savesUserInterface = 355
+	loadScene = 93
+	loadUserInterface = 96
+	splashscreenScene.lua = 74
+	cell.lua = 44
+	data.lua = 9
+	TOTAL: 1323 L.O.C
+(with lots of white space)
+
+
