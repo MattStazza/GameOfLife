@@ -51,6 +51,27 @@ local function createBoard(group)
 end
 
 
+function randomiseCells()
+    for index, cell in ipairs(cells) do
+
+        random = math.random(1, 4)
+
+        if (random == 1) then
+            makeAlive(cell)
+        else 
+            makeDead(cell)
+        end
+    end
+end
+
+function resetCells()
+    for index, cell in ipairs(cells) do
+        if cell.isAlive then
+            makeDead(cell)
+        end
+    end
+end
+
 
 
 --===============================================================================================================================||
@@ -109,6 +130,8 @@ function scene:hide(event)
         -- Called when the scene is on screen and is about to move off screen
     elseif phase == "did" then
         -- Called when the scene has moved off screen
+        updateCellSizeModifier(appData)
+        resetCells()
     end
 end
 

@@ -38,6 +38,16 @@ local function onCloseButtonTap(self)
 end
 
 
+local function onRandomButtonTap(self)
+    randomiseCells()
+end
+
+
+local function onEraseButtonTap(self)
+    resetCells()
+end
+
+
 -- Digit Control Functions (to set grid size) --
 
 local function onOneUpButtonTap(self)
@@ -66,7 +76,6 @@ local function onOneDownButtonTap(self)
     oneDigitText.text = oneDigit
 end
 
-
 local function onTenUpButtonTap(self)
     tenDigit = tenDigit + 1
     if tenDigit == 10 then
@@ -82,7 +91,6 @@ local function onTenDownButtonTap(self)
     end
     tenDigitText.text = tenDigit
 end
-
 
 local function onHundredUpButtonTap(self)
     hundredDigit = hundredDigit + 1
@@ -113,9 +121,18 @@ local function updateGridSizeOnButtonTap(self)
     
     -- Update Grid Size to be out custom value
     appData.gridSize = newGridSize
+    updateCellSizeModifier(appData)
+    
     -- Reload the Scene to see changes
     composer.gotoScene("saveScene")
+    --randomiseCells()
 end
+
+
+
+
+
+
 
 function getCustomGridSize()
     customGridSize = tonumber(hundredDigit .. tenDigit .. oneDigit)
@@ -135,17 +152,13 @@ end
 
 
 
-
-
-
-
 function UI.createUI()
     
     local uiGroup = display.newGroup()
     
     --============== CREATING BUTTONS ====================================|
 
-    -- LOAD BUTTON --
+    -- SAVE/LOAD BUTTON --
     saveButton = widget.newButton({
         width = appData.buttonWidth ,    
         height = appData.buttonHeight,
@@ -280,6 +293,46 @@ function UI.createUI()
     })
     --------------------------------------------------------------------
 
+
+
+    --------------------- RANDOMISE & CLEAR BUTTONS -----------------
+    -- RANDOMISE BUTTON -- 
+    local randomIcon = display.newImage("RandomIcon.png")
+    randomIcon.width = appData.buttonWidth  / 4
+    randomIcon.height = appData.buttonWidth  / 4
+
+    local randomiseButton = widget.newButton({
+        width = appData.buttonWidth  / 4,    
+        height = appData.buttonHeight,
+        onRelease = function(event)
+            onRandomButtonTap(self)
+        end
+    })
+
+    randomIcon.x = saveButton.width / 2
+    randomIcon.y = saveButton.height / 2
+    randomiseButton:insert(randomIcon)
+
+
+   -- ERASE BUTTON -- 
+   local eraseIcon = display.newImage("EraseIcon.png")
+   eraseIcon.width = appData.buttonWidth  / 4
+   eraseIcon.height = appData.buttonWidth  / 4
+
+   local eraseButton = widget.newButton({
+       width = appData.buttonWidth  / 4,    
+       height = appData.buttonHeight,
+       onRelease = function(event)
+            onEraseButtonTap(self)
+       end
+   })
+
+   eraseIcon.x = eraseButton.width / 2
+   eraseIcon.y = eraseButton.height / 2
+   eraseButton:insert(eraseIcon)  
+
+    --------------------------------------------------------------------
+
     --===================================================================|
 
 
@@ -328,11 +381,18 @@ function UI.createUI()
     hundredDigitDownButton.x = xPos - appData.buttonWidth / 4
     hundredDigitDownButton.y = digitDownButtonYPos
 
-    
+
+
+    -- Position Randomise Button
+    randomiseButton.x = appData.buttonWidth  / 4 
+    randomiseButton.y = bottomY - appData.buttonHeight / 1.5
+
+    -- Position Erase Button
+    eraseButton.x = display.contentWidth - appData.buttonWidth  / 4
+    eraseButton.y = bottomY - appData.buttonHeight / 1.5
 
     --------------------------------------------------------------------|
    
-
 
     -- Insert Buttons into UIGroup
     uiGroup:insert(saveButton) 
@@ -350,10 +410,12 @@ function UI.createUI()
     uiGroup:insert(hundredDigitUpButton) 
     uiGroup:insert(hundredDigitDownButton) 
 
+    uiGroup:insert(randomiseButton)
+    uiGroup:insert(eraseButton)
+
     return uiGroup
 
 end
-
 
 
 

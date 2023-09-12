@@ -25,7 +25,7 @@ function toggleCell(self)
 end
 
 function Cell.new(x, y, size)
-    local cellSize = size * 0.95
+    local cellSize = size * appData.cellSizeModifier
     local self = display.newRect(x, y, cellSize, cellSize)
     self:setFillColor(1, 1, 1) 
     self:setStrokeColor(0, 0, 0)
