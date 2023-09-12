@@ -113,7 +113,6 @@ function scene:show(event)
 
     if phase == "will" then
         -- Called when the scene is about to come on screen
-        -- Board for editing/saving (Save Scene)
         createBoard(sceneGroup)
     elseif phase == "did" then
         -- Called when the scene is now on screen
@@ -130,6 +129,7 @@ function scene:hide(event)
         -- Called when the scene is on screen and is about to move off screen
     elseif phase == "did" then
         -- Called when the scene has moved off screen
+        cells = {} -- Must Reset Cells
         updateCellSizeModifier(appData)
         resetCells()
     end

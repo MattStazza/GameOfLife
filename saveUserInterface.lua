@@ -125,7 +125,6 @@ local function updateGridSizeOnButtonTap(self)
     
     -- Reload the Scene to see changes
     composer.gotoScene("saveScene")
-    --randomiseCells()
 end
 
 
