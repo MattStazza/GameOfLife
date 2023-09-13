@@ -1,6 +1,7 @@
 local composer = require("composer")
 local widget = require("widget")
 local appData = require("data")
+local saver = require("saver")
 -------------------------------------------------------------
 
 local UI = {}
@@ -19,7 +20,8 @@ local customGridSize = 0
 --------------- BUTTON FUNCTIONS ---------------------------|
 
 local function onSaveButtonTap(self)
-    print("Save")
+    saveGameBoard(saver)
+
     local transitionOptions = { effect = "fade", time = 500, }
     composer.gotoScene("gameScene", transitionOptions)
     

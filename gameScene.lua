@@ -7,8 +7,6 @@ local Cell = require("cell")
 local UI = require("gameUserInterface")
 -----------------------------------------------------
 
-local cellSize = display.actualContentWidth * appData.screenPercentage / appData.gridSize
-
 local running = false
 local stepCount = 0
 local stepText
@@ -23,6 +21,8 @@ local cells = {}
 
 local function createGameBoard(group)
     
+    cellSize = display.actualContentWidth * appData.screenPercentage / appData.gridSize
+
     gameBoard = display.newGroup() -- Create a display group for the grid
 
     for row = 1, appData.gridSize do
@@ -56,6 +56,7 @@ end
 
 
 function resetCells()
+    print("BUG - needs fixing")
     for index, cell in ipairs(cells) do
         if cell.isAlive then
             makeDead(cell)

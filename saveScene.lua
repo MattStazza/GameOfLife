@@ -7,7 +7,6 @@ local Cell = require("cell")
 local UI = require("saveUserInterface")
 ---------------------------------------
 
-local cellSize
 local cells = {}
 
 -----------------------------------------------------
@@ -26,8 +25,12 @@ local function createBoard(group)
     display.remove(board)
     board = nil
 
-    board = display.newGroup() -- Create a display group for the grid
+    -- Create a display group for the grid
+    board = display.newGroup()
 
+    cells = {} -- Must Empty Cells
+    appData.cells = {}
+    
     for row = 1, appData.gridSize do
         for col = 1, appData.gridSize do
             local x = (col - 1) * cellSize
@@ -36,6 +39,7 @@ local function createBoard(group)
 
             local index = (row - 1) * appData.gridSize + col
             cells[index] = newCell -- Insert the cell into the cells table
+            appData.cells[index] = newCell
 
             board:insert(newCell) -- Insert the cell into the Board group
         end
@@ -129,7 +133,6 @@ function scene:hide(event)
         -- Called when the scene is on screen and is about to move off screen
     elseif phase == "did" then
         -- Called when the scene has moved off screen
-        cells = {} -- Must Reset Cells
         updateCellSizeModifier(appData)
         resetCells()
     end
