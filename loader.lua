@@ -3,14 +3,14 @@ local fileID
 
 
 -- Text File always valid because the Save function runs before
-local function setFileID()
+function setFileID()
 
     local path = system.pathForFile("saveID.txt", system.DocumentsDirectory)
     local file, errorString = io.open( path, "r" )
   
     if file then
         fileID = tonumber(file:read("*a") or 0) - 1 -- Need to remove 1 because SaveID has been incremented
-      file:close()
+        file:close()
     end
   end
 

@@ -2,15 +2,60 @@
 local composer = require("composer")
 local scene = composer.newScene()
 
+local appData = require("data")
+local loader = require("loader")
+local Cell = require("cell")
 local UI = require("loadUserInterface")
 ---------------------------------------
-
-
 
 
 local function addUserInterface(group)
     ui = UI.createUI()
     group:insert(ui)
+end
+
+local function createBoard(group)
+    
+    cellSize = display.actualContentWidth * appData.screenPercentage / appData.gridSize
+    
+    -- Remove current board before making the new board
+    display.remove(board)
+    board = nil
+
+    -- Create a display group for the grid
+    board = display.newGroup()
+
+    cells = {} -- Must Empty Cells
+    appData.cells = {}
+    
+    for row = 1, appData.gridSize do
+        for col = 1, appData.gridSize do
+            local x = (col - 1) * cellSize
+            local y = (row - 1) * cellSize
+            local newCell = Cell.new(x, y, cellSize)
+
+            local index = (row - 1) * appData.gridSize + col
+            cells[index] = newCell -- Insert the cell into the cells table
+            appData.cells[index] = newCell
+
+            board:insert(newCell) -- Insert the cell into the Board group
+        end
+    end
+
+    -- Center the Board
+    board.x = display.contentCenterX - (cellSize * (appData.gridSize - 1)) / 2
+    board.y = display.contentCenterY - board.height / 1.5
+
+    -- Insert the Board into the Scene
+    group:insert(board) 
+
+end
+
+
+function loadSpecificGameboard()
+
+    print("Loading")
+
 end
 
 
@@ -53,6 +98,7 @@ function scene:show(event)
 
     if phase == "will" then
         -- Called when the scene is about to come on screen
+        createBoard(sceneGroup)
     elseif phase == "did" then
         -- Called when the scene is now on screen
     end

@@ -105,7 +105,6 @@ function scene:create(event)
 
     -- User Interface (Save Scene)
     addUserInterface(sceneGroup)
-
     resetDigits(saveScene)
 end
 

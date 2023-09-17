@@ -5,6 +5,13 @@ local appData = require("data")
 
 local UI = {}
 
+local count = 0
+
+local currentFileNumberText
+currentfileNumberTextOptions = { text = count .. " / ", fontSize = 28, }
+local totalFileNumberText
+totalfileNumberTextOptions = { text = tostring(fileID), fontSize = 28, }
+
 --------------- BUTTON FUNCTIONS ---------------------------|
 
 local function onLoadButtonTap(self)
@@ -21,15 +28,15 @@ end
 
 local function onLeftButtonTap(self)
     print("Left")
+    loadSpecificGameboard(loadScene)
 end
 
 local function onRightButtonTap(self)
     print("Right")
+    loadSpecificGameboard(loadScene)
 end
 
-
 ---------------------------------------------------------------|
-
 
 
 
@@ -109,6 +116,13 @@ function UI.createUI()
     rightButton:insert(rightIcon)
 
 
+    -------------------------------------------------------------------
+
+
+    -- FILE INDICATOR TEXT
+    currentFileNumberText = display.newText(currentfileNumberTextOptions)
+    totalFileNumberText = display.newText(totalfileNumberTextOptions)
+
 
     --===================================================================|
 
@@ -132,6 +146,12 @@ function UI.createUI()
     rightButton.x = display.contentWidth - (appData.buttonWidth / 4)
     rightButton.y = display.contentHeight / 2
 
+    currentFileNumberText.x = display.contentWidth / 2.1
+    currentFileNumberText.y = bottomY - (appData.buttonHeight * 4)
+
+    totalFileNumberText.x = display.contentWidth / 1.8
+    totalFileNumberText.y = bottomY - (appData.buttonHeight * 4)
+
     --------------------------------------------------------------------|
    
 
@@ -141,6 +161,8 @@ function UI.createUI()
     uiGroup:insert(closeButton)
     uiGroup:insert(leftButton) 
     uiGroup:insert(rightButton)
+    uiGroup:insert(currentFileNumberText)
+    uiGroup:insert(totalFileNumberText)
 
     return uiGroup
 
