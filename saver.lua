@@ -4,7 +4,7 @@ local appData = require("data")
 function saveGameBoard()
     
   -- NEED TO FIX ABSALUTE PATH
-  fileName = "D:/Programming Projects/GameOfLife/gameboard.txt"
+  fileName = "D:/Programming Projects/GameOfLife/saves/gameboard.txt"
 
   -- Try to open the file for writing, create it if it doesn't exist
   local file, errorString = io.open(fileName, "w+")
