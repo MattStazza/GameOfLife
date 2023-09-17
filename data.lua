@@ -10,7 +10,6 @@ M.speed = 1  -- Initialize Speed
 M.buttonHeight = 30
 M.buttonWidth = 100
 
-
 function updateCellSizeModifier()
     if (M.gridSize <= 20) then
         M.cellSizeModifier = 0.95
@@ -22,6 +21,5 @@ function updateCellSizeModifier()
         M.cellSizeModifier = 1
     end
 end
-
 
 return M
