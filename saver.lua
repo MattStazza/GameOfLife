@@ -12,7 +12,7 @@ local function getSaveID()
   local path = system.pathForFile("saveID.txt", system.DocumentsDirectory)
   local file, errorString = io.open( path, "r" )
 
-  -- If the file doesn't exist... create file, write to it & set SaveID to 0
+  -- If the file doesn't exist... Set SaveID & create new file.
   if errorString then
     local file, errorString = io.open( path, "w" )
     saveID = 0
@@ -50,18 +50,13 @@ end
 
 -- Function to save the game board to a text file
 function saveGameBoard()
-    
-  -- NEED TO FIX ABSALUTE PATH
-  --fileName = "D:/Programming Projects/GameOfLife/saves/gameboard.txt"
-  fileName = "C:/Users/matth/OneDrive/Desktop/Programming Projects/GameOfLife/saves/gameboard.txt"
-  --fileName = "gameboard.txt"
 
   getSaveID()
 
-  -- Try to open the file for writing, create it if it doesn't exist
-  local file, errorString = io.open(fileName, "w+")
+  local path = system.pathForFile("gameboard" .. tostring(saveID) .. ".txt", system.DocumentsDirectory)
+  local file, errorString = io.open( path, "w" )
+
   if file then
-    -- Write gridSize to the file
     file:write(appData.gridSize .. "\n")
       
     count = 0
@@ -84,12 +79,11 @@ function saveGameBoard()
   end
       
     incrementSaveID()
-    print("Gameboard Saved to: " .. fileName)
-
-  -- Close the file
+    print("Gameboard Saved")
     file:close()
+
   else
-    print("Error: Unable to create or open file.")
+    print("Error: Unable to create or open file: " .. errorString)
   end
 end
 
