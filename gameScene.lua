@@ -23,18 +23,34 @@ local function createGameBoard(group)
     
     cellSize = display.actualContentWidth * appData.screenPercentage / appData.gridSize
 
-    gameBoard = display.newGroup() -- Create a display group for the grid
+    -- Remove current board before making the new board
+    display.remove(gameBoard)
+    gameBoard = nil
+    cells = {} -- Must Empty Cells
+    --cells = appData.cells
+
+    -- Create a display group for the grid
+    gameBoard = display.newGroup()
 
     for row = 1, appData.gridSize do
         for col = 1, appData.gridSize do
             local x = (col - 1) * cellSize
             local y = (row - 1) * cellSize
-            local newCell = Cell.new(x, y, cellSize)
-
+            local newCell = Cell.new(x, y, cellSize)   
             local index = (row - 1) * appData.gridSize + col
             cells[index] = newCell -- Insert the cell into the cells table
 
             gameBoard:insert(newCell) -- Insert the cell into the gameBoard group
+        end
+    end
+
+    -- Load Cells
+    for index, cell in ipairs(appData.cells) do
+        print(cell.isAlive)
+        if cell.isAlive then
+           makeAlive(cells[index])
+        else
+           makeDead(cells[index])
         end
     end
 
@@ -52,19 +68,6 @@ local function createGameBoard(group)
     -- Insert the GameBoard into the Scene
     group:insert(gameBoard) 
 
-end
-
-
-function resetCells()
-    print("BUG - needs fixing")
-    for index, cell in ipairs(cells) do
-        if cell.isAlive then
-            makeDead(cell)
-            print("Killed Cell:", index)
-        end
-    end
-    stepCount = 0
-    stepText.text = stepCount
 end
 
 
@@ -223,9 +226,6 @@ function scene:create(event)
     titleText = display.newText(textOptions)
     sceneGroup:insert(titleText)
 
-    -- Gameboard (Grid)
-    createGameBoard(sceneGroup)
-
     -- User Interface (Game Scene)
     addUserInterface(sceneGroup)
 end
@@ -238,6 +238,7 @@ function scene:show(event)
 
     if phase == "will" then
         -- Called when the scene is about to come on screen
+        createGameBoard(sceneGroup)
     elseif phase == "did" then
         -- Called when the scene is now on screen
     end
@@ -254,7 +255,6 @@ function scene:hide(event)
     elseif phase == "did" then
         -- Called when the scene has moved off screen
         stopSimulation()
-        resetCells()
     end
 end
 

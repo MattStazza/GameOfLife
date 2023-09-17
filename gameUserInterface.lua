@@ -36,9 +36,12 @@ local function onStartButtonTap(self)
 end
 
 
-local function onClearButtonTap(self)
-    print("Clear Button Pressed")
-    resetCells(gameScene)
+local function onResetButtonTap(self)
+    print("Reset")
+    appData.gridSize = 5
+    appData.cells = {}
+    updateCellSizeModifier(appData)
+    composer.gotoScene("gameScene") -- Reload Scene
 end
 
 local function onSpeedUpButtonTap(self)
@@ -60,13 +63,11 @@ local function onSpeedDownButtonTap(self)
 end
 
 local function onSaveButtonTap(self)
-    print("Save")
     local transitionOptions = { effect = "fromBottom", time = 500, }
     composer.gotoScene("saveScene", transitionOptions)
 end
 
 local function onLoadButtonTap(self)
-    print("Load")
     local transitionOptions = { effect = "fromTop", time = 500, }
     composer.gotoScene("loadScene", transitionOptions)
 end
@@ -96,17 +97,17 @@ function UI.createUI()
         end
     })
 
-   -- CLEAR BUTTON -- 
-   local clearButton = widget.newButton({
+   -- RESET BUTTON -- 
+   local resetButton = widget.newButton({
         width = appData.buttonWidth ,    
         height = appData.buttonHeight,
-        label = "Clear",
+        label = "Reset",
         fontSize = 16,
         labelColor = { default={1,1,1}, over={0.5,0.5,0.5} },
         shape = "roundedRect",
         fillColor = { default={1,0,0,1}, over={0.2,0.6,0.2,0.6} },
         onRelease = function(event)
-            onClearButtonTap(self)
+            onResetButtonTap(self)
         end
     })
 
@@ -188,8 +189,8 @@ function UI.createUI()
     local bottomY = display.contentHeight
     
     -- Set the position of the button
-    clearButton.x = display.contentWidth / 2
-    clearButton.y = bottomY - appData.buttonHeight * 1.25
+    resetButton.x = display.contentWidth / 2
+    resetButton.y = bottomY - appData.buttonHeight * 1.25
 
     startButton.x = display.contentWidth / 2
     startButton.y = bottomY - (appData.buttonHeight * 2.5)
@@ -213,7 +214,7 @@ function UI.createUI()
    
     -- Insert Buttons into UIGroup
     uiGroup:insert(startButton) 
-    uiGroup:insert(clearButton) 
+    uiGroup:insert(resetButton) 
     uiGroup:insert(speedUpButton) 
     uiGroup:insert(speedDownButton) 
     uiGroup:insert(speedText) 

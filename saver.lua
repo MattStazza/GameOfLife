@@ -1,13 +1,8 @@
 local appData = require("data")
-
-
 local saveID
 
 
-
-
-
-local function getSaveID()
+local function setSaveID()
 
   local path = system.pathForFile("saveID.txt", system.DocumentsDirectory)
   local file, errorString = io.open( path, "r" )
@@ -30,6 +25,7 @@ local function getSaveID()
 end
 
 
+
 local function incrementSaveID()
   saveID = saveID + 1
 
@@ -46,12 +42,10 @@ local function incrementSaveID()
 end
 
 
-
-
--- Function to save the game board to a text file
+-- Function to save the gameboard to a text file
 function saveGameBoard()
 
-  getSaveID()
+  setSaveID()
 
   local path = system.pathForFile("gameboard" .. tostring(saveID) .. ".txt", system.DocumentsDirectory)
   local file, errorString = io.open( path, "w" )

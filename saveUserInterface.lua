@@ -2,6 +2,7 @@ local composer = require("composer")
 local widget = require("widget")
 local appData = require("data")
 local saver = require("saver")
+local loader = require("loader")
 -------------------------------------------------------------
 
 local UI = {}
@@ -21,11 +22,10 @@ local customGridSize = 0
 
 local function onSaveButtonTap(self)
     saveGameBoard(saver)
+    loadGameBoard(loader)
 
     local transitionOptions = { effect = "fade", time = 500, }
     composer.gotoScene("gameScene", transitionOptions)
-    
-    appData.gridSize = 5
     resetDigits()
 end
 
@@ -34,8 +34,6 @@ local function onCloseButtonTap(self)
     print("Close")
     local transitionOptions = { effect = "slideDown", time = 500, }
     composer.gotoScene("gameScene", transitionOptions)
-    
-    appData.gridSize = 5
     resetDigits()
 end
 
