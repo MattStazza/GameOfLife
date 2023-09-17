@@ -10,7 +10,6 @@ local function setFileID()
   
     if file then
         fileID = tonumber(file:read("*a") or 0) - 1 -- Need to remove 1 because SaveID has been incremented
-      print("Current FileID:" .. fileID)
       file:close()
     end
   end
@@ -39,17 +38,14 @@ function loadGameBoard()
                 else
                     cell.isAlive = false
                 end
-                --print(cell.isAlive)
-                table.insert(row, cell)
+                table.insert(cells, cell)
             end
-
-            table.insert(cells, row)
         end
     
         file:close()
         appData.gridSize = gridSize
         appData.cells = cells
-        print("Gameboard Loaded")
+        print("Gameboard Loaded. FileID: " .. fileID)
     
       else
       print("Error: Unable to open file: " .. errorString)

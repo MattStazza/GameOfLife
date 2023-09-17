@@ -27,7 +27,6 @@ local function createGameBoard(group)
     display.remove(gameBoard)
     gameBoard = nil
     cells = {} -- Must Empty Cells
-    --cells = appData.cells
 
     -- Create a display group for the grid
     gameBoard = display.newGroup()
@@ -46,7 +45,6 @@ local function createGameBoard(group)
 
     -- Load Cells
     for index, cell in ipairs(appData.cells) do
-        print(cell.isAlive)
         if cell.isAlive then
            makeAlive(cells[index])
         else
@@ -133,7 +131,6 @@ function startSimulation()
             return
         end
         
-        print("step")
         stepCount = stepCount + 1
         stepText.text = stepCount
 
@@ -181,9 +178,15 @@ function startSimulation()
 end
 
 
-function stopSimulation()
-    print("Stopped")
+function pauseSimulation()
+    print("Paused")
     running = false
+end
+
+
+function resetCounter()
+    stepCount = 0
+    stepText.text = stepCount
 end
 
 
@@ -254,7 +257,7 @@ function scene:hide(event)
         -- Called when the scene is on screen and is about to move off screen
     elseif phase == "did" then
         -- Called when the scene has moved off screen
-        stopSimulation()
+        pauseSimulation()
     end
 end
 

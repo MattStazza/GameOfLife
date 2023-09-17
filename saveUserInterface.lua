@@ -22,6 +22,7 @@ local customGridSize = 0
 
 local function onSaveButtonTap(self)
     saveGameBoard(saver)
+    resetCounter(gameScene)
     loadGameBoard(loader)
 
     local transitionOptions = { effect = "fade", time = 500, }
@@ -32,9 +33,12 @@ end
 
 local function onCloseButtonTap(self)
     print("Close")
+    resetDigits()
+    appData.gridSize = 5
+    appData.cells = {}
+    updateCellSizeModifier(appData)
     local transitionOptions = { effect = "slideDown", time = 500, }
     composer.gotoScene("gameScene", transitionOptions)
-    resetDigits()
 end
 
 

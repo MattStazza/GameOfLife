@@ -26,10 +26,10 @@ local function onStartButtonTap(self)
     if isRunning then
         isRunning = false
         startButton:setLabel("Start")
-        stopSimulation(gameScene)
+        pauseSimulation(gameScene)
     else
         isRunning = true
-        startButton:setLabel("Stop")
+        startButton:setLabel("Pause")
         startSimulation(gameScene)
     end
     -- Additional code for handling start/stop logic
@@ -50,7 +50,7 @@ local function onSpeedUpButtonTap(self)
         appData.speed = 10  -- Clamp speed at 10
     end 
     speedText.text = "x" .. appData.speed
-    print(appData.speed)
+    print("Speed: " .. appData.speed)
 end
 
 local function onSpeedDownButtonTap(self)
@@ -59,7 +59,7 @@ local function onSpeedDownButtonTap(self)
         appData.speed = 1  -- Clamp speed at 0
     end  
     speedText.text = "x" .. appData.speed
-    print(appData.speed)
+    print("Speed: " .. appData.speed)
 end
 
 local function onSaveButtonTap(self)

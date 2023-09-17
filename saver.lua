@@ -17,7 +17,6 @@ local function setSaveID()
 
   if file then
     saveID = tonumber(file:read("*a") or 0)
-    print("Current SaveID:" .. saveID)
     file:close()
   else
     print("Can't find saveID file: " .. errorString)
@@ -73,7 +72,7 @@ function saveGameBoard()
   end
       
     incrementSaveID()
-    print("Gameboard Saved")
+    print("Gameboard Saved. FileID: " .. saveID - 1)
     file:close()
 
   else
