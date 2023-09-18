@@ -10,7 +10,7 @@ local count = 1
 local totalPresets = 0
 
 local presetIndicatorText
-presetIndicatorTextTextOptions = { text = count .. " / " .. totalPresets, fontSize = 28, }
+presetIndicatorTextTextOptions = { text = "No Presets", fontSize = 28, }
 
 --------------- BUTTON FUNCTIONS ---------------------------|
 
@@ -28,6 +28,9 @@ local function onCloseButtonTap(self)
 end
 
 local function onLeftButtonTap(self)
+    if totalPresets == 0 then
+        return
+    end
     count = count - 1
     if count <= 0 then
         count = totalPresets
@@ -37,6 +40,9 @@ local function onLeftButtonTap(self)
 end
 
 local function onRightButtonTap(self)
+    if totalPresets == 0 then
+        return
+    end
     count = count + 1
     if count >= totalPresets + 1 then
         count = 1
@@ -48,11 +54,14 @@ end
 ---------------------------------------------------------------|
 
 
+
+
 function loadCurrentPreset()
     appData.fileIDToLoad = count - 1
     loadSpecificGameboard(loader)   
     composer.gotoScene("loadScene") -- Reload the Scene to see changes
 end
+
 
 function setTotalNumberOfSaveFiles()
     
@@ -66,8 +75,13 @@ function setTotalNumberOfSaveFiles()
         totalPresets = 0
     end
 
-    presetIndicatorText.text = count .. " / " .. totalPresets
+    if totalPresets == 0 then
+        presetIndicatorText.text = "No Presets Saved"
+    else
+        presetIndicatorText.text = count .. " / " .. totalPresets
+    end
 end
+
 
 
 
@@ -154,7 +168,6 @@ function UI.createUI()
     -- FILE INDICATOR TEXT
     presetIndicatorText = display.newText(presetIndicatorTextTextOptions)
     setTotalNumberOfSaveFiles()
-
 
     --===================================================================|
 
