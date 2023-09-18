@@ -1,8 +1,10 @@
 local M = {}  -- Module table
 
-M.gridSize = 5 -- Initialize Grid Size
+M.gridSize = 5
 M.cells = {}
 M.cellSizeModifier = 0.95
+
+M.fileIDToLoad = 0
 
 M.screenPercentage = 0.75 -- Percentage of the screen width for the gameBoard
 M.speed = 1  -- Initialize Speed
@@ -20,6 +22,13 @@ function updateCellSizeModifier()
     else
         M.cellSizeModifier = 1
     end
+end
+
+
+function resetData()
+    M.gridSize = 5
+    M.cells = {}
+    updateCellSizeModifier()
 end
 
 return M

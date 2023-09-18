@@ -14,6 +14,7 @@ local function addUserInterface(group)
     group:insert(ui)
 end
 
+
 local function createBoard(group)
     
     cellSize = display.actualContentWidth * appData.screenPercentage / appData.gridSize
@@ -21,24 +22,29 @@ local function createBoard(group)
     -- Remove current board before making the new board
     display.remove(board)
     board = nil
-
+    cells = {} -- Must Empty Cells
+    
     -- Create a display group for the grid
     board = display.newGroup()
-
-    cells = {} -- Must Empty Cells
-    appData.cells = {}
     
     for row = 1, appData.gridSize do
         for col = 1, appData.gridSize do
             local x = (col - 1) * cellSize
             local y = (row - 1) * cellSize
-            local newCell = Cell.new(x, y, cellSize)
-
+            local newCell = Cell.new(x, y, cellSize)   
             local index = (row - 1) * appData.gridSize + col
             cells[index] = newCell -- Insert the cell into the cells table
-            appData.cells[index] = newCell
 
-            board:insert(newCell) -- Insert the cell into the Board group
+            board:insert(newCell) -- Insert the cell into the gameBoard group
+        end
+    end
+
+    -- Load Cells
+    for index, cell in ipairs(appData.cells) do
+        if cell.isAlive then
+           makeAlive(cells[index])
+        else
+           makeDead(cells[index])
         end
     end
 
@@ -50,14 +56,6 @@ local function createBoard(group)
     group:insert(board) 
 
 end
-
-
-function loadSpecificGameboard()
-
-    print("Loading")
-
-end
-
 
 
 
@@ -99,6 +97,7 @@ function scene:show(event)
     if phase == "will" then
         -- Called when the scene is about to come on screen
         createBoard(sceneGroup)
+        setTotalNumberOfSaveFiles()
     elseif phase == "did" then
         -- Called when the scene is now on screen
     end

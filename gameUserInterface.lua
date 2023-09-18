@@ -38,9 +38,7 @@ end
 
 local function onResetButtonTap(self)
     print("Reset")
-    appData.gridSize = 5
-    appData.cells = {}
-    updateCellSizeModifier(appData)
+    resetData(appData)
     composer.gotoScene("gameScene") -- Reload Scene
 end
 
@@ -63,6 +61,7 @@ local function onSpeedDownButtonTap(self)
 end
 
 local function onSaveButtonTap(self)
+    resetData(appData)
     local transitionOptions = { effect = "fromBottom", time = 500, }
     composer.gotoScene("saveScene", transitionOptions)
 end

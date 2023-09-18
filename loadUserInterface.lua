@@ -1,16 +1,16 @@
 local composer = require("composer")
 local widget = require("widget")
 local appData = require("data")
+local loader = require("loader")
 -------------------------------------------------------------
 
 local UI = {}
 
-local count = 0
+local count = 1
+local totalPresets = 0
 
-local currentFileNumberText
-currentfileNumberTextOptions = { text = count .. " / ", fontSize = 28, }
-local totalFileNumberText
-totalfileNumberTextOptions = { text = tostring(fileID), fontSize = 28, }
+local presetIndicatorText
+presetIndicatorTextTextOptions = { text = count .. " / " .. totalPresets, fontSize = 28, }
 
 --------------- BUTTON FUNCTIONS ---------------------------|
 
@@ -22,21 +22,53 @@ end
 
 local function onCloseButtonTap(self)
     print("Close")
+    resetData(appData)
     local transitionOptions = { effect = "slideUp", time = 500, }
     composer.gotoScene("gameScene", transitionOptions)
 end
 
 local function onLeftButtonTap(self)
-    print("Left")
-    loadSpecificGameboard(loadScene)
+    count = count - 1
+    if count <= 0 then
+        count = totalPresets
+    end
+    presetIndicatorText.text = count .. " / " .. totalPresets
+    loadCurrentPreset()
 end
 
 local function onRightButtonTap(self)
-    print("Right")
-    loadSpecificGameboard(loadScene)
+    count = count + 1
+    if count >= totalPresets + 1 then
+        count = 1
+    end
+    presetIndicatorText.text = count .. " / " .. totalPresets
+    loadCurrentPreset()
 end
 
 ---------------------------------------------------------------|
+
+
+function loadCurrentPreset()
+    appData.fileIDToLoad = count - 1
+    loadSpecificGameboard(loader)   
+    composer.gotoScene("loadScene") -- Reload the Scene to see changes
+end
+
+function setTotalNumberOfSaveFiles()
+    
+    local path = system.pathForFile("saveID.txt", system.DocumentsDirectory)
+    local file, errorString = io.open( path, "r" )
+  
+    if file then
+        totalPresets = tonumber(file:read("*a") or 0)
+        file:close()
+    else
+        totalPresets = 0
+    end
+
+    presetIndicatorText.text = count .. " / " .. totalPresets
+end
+
 
 
 
@@ -120,8 +152,8 @@ function UI.createUI()
 
 
     -- FILE INDICATOR TEXT
-    currentFileNumberText = display.newText(currentfileNumberTextOptions)
-    totalFileNumberText = display.newText(totalfileNumberTextOptions)
+    presetIndicatorText = display.newText(presetIndicatorTextTextOptions)
+    setTotalNumberOfSaveFiles()
 
 
     --===================================================================|
@@ -146,11 +178,8 @@ function UI.createUI()
     rightButton.x = display.contentWidth - (appData.buttonWidth / 4)
     rightButton.y = display.contentHeight / 2
 
-    currentFileNumberText.x = display.contentWidth / 2.1
-    currentFileNumberText.y = bottomY - (appData.buttonHeight * 4)
-
-    totalFileNumberText.x = display.contentWidth / 1.8
-    totalFileNumberText.y = bottomY - (appData.buttonHeight * 4)
+    presetIndicatorText.x = display.contentWidth / 2
+    presetIndicatorText.y = bottomY - (appData.buttonHeight * 4)
 
     --------------------------------------------------------------------|
    
@@ -161,8 +190,7 @@ function UI.createUI()
     uiGroup:insert(closeButton)
     uiGroup:insert(leftButton) 
     uiGroup:insert(rightButton)
-    uiGroup:insert(currentFileNumberText)
-    uiGroup:insert(totalFileNumberText)
+    uiGroup:insert(presetIndicatorText)
 
     return uiGroup
 
