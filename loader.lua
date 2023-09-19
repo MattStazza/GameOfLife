@@ -15,7 +15,6 @@ function setFileID()
   end
 
 
-
 function loadGameBoard()
 
     setFileID()

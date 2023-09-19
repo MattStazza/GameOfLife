@@ -90,7 +90,7 @@ function scene:create(event)
 
     -- Background
     local background = display.newRect(sceneGroup, display.contentCenterX, display.contentCenterY, display.actualContentWidth, display.actualContentHeight)
-    background:setFillColor(unpack(appData.backgroundColor))
+    background:setFillColor(unpack(appData.backgroundColor2))
 
     -- Title Text
     local textOptions = {
