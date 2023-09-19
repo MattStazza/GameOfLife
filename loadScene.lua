@@ -50,7 +50,7 @@ local function createBoard(group)
 
     -- Center the Board
     board.x = display.contentCenterX - (cellSize * (appData.gridSize - 1)) / 2
-    board.y = display.contentCenterY - board.height / 1.5
+    board.y = (display.contentCenterY - (cellSize * (appData.gridSize - 1)) / 2) - (appData.buttonHeight * 2)
 
     -- Insert the Board into the Scene
     group:insert(board) 
@@ -71,7 +71,7 @@ function scene:create(event)
 
     -- Background
     local background = display.newRect(sceneGroup, display.contentCenterX, display.contentCenterY, display.actualContentWidth, display.actualContentHeight)
-    background:setFillColor(0, 0.75, 1)
+    background:setFillColor(unpack(appData.backgroundColor2))
 
     -- Title Text
     local textOptions = {

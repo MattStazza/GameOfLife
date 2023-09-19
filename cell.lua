@@ -25,11 +25,15 @@ function toggleCell(self)
 end
 
 function Cell.new(x, y, size)
-    local cellSize = size * appData.cellSizeModifier
     local self = display.newRect(x, y, cellSize, cellSize)
-    self:setFillColor(1, 1, 1) 
-    self:setStrokeColor(0, 0, 0)
-    self.isAlive = false -- Initialize the tapped state
+
+    self.fill.effect = "generator.linearGradient"
+    self.fill.effect.color1 = { 0.9, 1, 1, 1 }
+    self.fill.effect.position1  = { 1, 0.5 }
+    self.fill.effect.color2 = { 0.9, 0.9, 0.9, 1 }
+    self.fill.effect.position2  = { 0.5, 1 }
+
+    self.isAlive = false
 
     function self:tap(event)
         toggleCell(self)

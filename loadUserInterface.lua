@@ -126,9 +126,10 @@ function UI.createUI()
 
     
     -- LEFT BUTTON -- 
-    local leftIcon = display.newImage("leftIcon.png")
+    local leftIcon = display.newImage("icons/LeftIcon.png")
     leftIcon.width = appData.buttonWidth / 4
-    leftIcon.height = appData.buttonWidth / 3
+    leftIcon.height = appData.buttonWidth / 4
+    leftIcon:setFillColor(unpack(appData.iconColor))
 
     local leftButton = widget.newButton({
         width = appData.buttonWidth / 4 ,    
@@ -145,9 +146,10 @@ function UI.createUI()
 
 
     -- RIGHT BUTTON -- 
-    local rightIcon = display.newImage("rightIcon.png")
+    local rightIcon = display.newImage("icons/RightIcon.png")
     rightIcon.width = appData.buttonWidth  / 4
-    rightIcon.height = appData.buttonWidth  / 3
+    rightIcon.height = appData.buttonWidth  / 4
+    rightIcon:setFillColor(unpack(appData.iconColor))
 
     local rightButton = widget.newButton({
         width = appData.buttonWidth / 4  ,    
@@ -185,11 +187,11 @@ function UI.createUI()
     loadButton.x = display.contentWidth / 2
     loadButton.y = bottomY - (appData.buttonHeight * 2.5)
 
-    leftButton.x = 0 + (appData.buttonWidth / 4)
-    leftButton.y = display.contentHeight / 2
+    leftButton.x = 0 + (appData.buttonWidth / 5)
+    leftButton.y = display.contentHeight / 2.5
     
-    rightButton.x = display.contentWidth - (appData.buttonWidth / 4)
-    rightButton.y = display.contentHeight / 2
+    rightButton.x = display.contentWidth - (appData.buttonWidth / 5)
+    rightButton.y = display.contentHeight / 2.5
 
     presetIndicatorText.x = display.contentWidth / 2
     presetIndicatorText.y = bottomY - (appData.buttonHeight * 4)

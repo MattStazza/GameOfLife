@@ -36,7 +36,6 @@ local function onCloseButtonTap(self)
     resetDigits()
     appData.gridSize = 5
     appData.cells = {}
-    updateCellSizeModifier(appData)
     local transitionOptions = { effect = "slideDown", time = 500, }
     composer.gotoScene("gameScene", transitionOptions)
 end
@@ -125,7 +124,6 @@ local function updateGridSizeOnButtonTap(self)
     
     -- Update Grid Size to be out custom value
     appData.gridSize = newGridSize
-    updateCellSizeModifier(appData)
     
     -- Reload the Scene to see changes
     composer.gotoScene("saveScene")
@@ -300,9 +298,11 @@ function UI.createUI()
 
     --------------------- RANDOMISE & CLEAR BUTTONS -----------------
     -- RANDOMISE BUTTON -- 
-    local randomIcon = display.newImage("RandomIcon.png")
-    randomIcon.width = appData.buttonWidth  / 4
-    randomIcon.height = appData.buttonWidth  / 4
+    local randomIcon = display.newImage("icons/RandomIcon.png")
+    randomIcon.width = appData.buttonWidth  / 3
+    randomIcon.height = appData.buttonWidth  / 3
+    randomIcon:setFillColor(unpack(appData.iconColor))
+
 
     local randomiseButton = widget.newButton({
         width = appData.buttonWidth  / 4,    
@@ -318,12 +318,14 @@ function UI.createUI()
 
 
    -- ERASE BUTTON -- 
-   local eraseIcon = display.newImage("EraseIcon.png")
-   eraseIcon.width = appData.buttonWidth  / 4
-   eraseIcon.height = appData.buttonWidth  / 4
+   local eraseIcon = display.newImage("icons/EraseIcon.png")
+   eraseIcon.width = appData.buttonWidth  / 3
+   eraseIcon.height = appData.buttonWidth  / 3
+   eraseIcon:setFillColor(unpack(appData.iconColor))
+
 
    local eraseButton = widget.newButton({
-       width = appData.buttonWidth  / 4,    
+       width = appData.buttonWidth / 4,    
        height = appData.buttonHeight,
        onRelease = function(event)
             onEraseButtonTap(self)
@@ -345,13 +347,13 @@ function UI.createUI()
     -- Calculate the bottom position
     local bottomY = display.contentHeight
     
+
     -- Set the position of the button
     closeButton.x = display.contentWidth / 2
     closeButton.y = bottomY - (appData.buttonHeight * 1.25)
 
     saveButton.x = display.contentWidth / 2
     saveButton.y = bottomY - (appData.buttonHeight * 2.5)
-
 
 
     -- Position Digit Text & Buttons (shared variables)
@@ -385,14 +387,14 @@ function UI.createUI()
     hundredDigitDownButton.y = digitDownButtonYPos
 
 
-
     -- Position Randomise Button
-    randomiseButton.x = appData.buttonWidth  / 4 
-    randomiseButton.y = bottomY - appData.buttonHeight / 1.5
+    randomiseButton.x = display.contentWidth / 2 - appData.buttonWidth
+    randomiseButton.y = digitUpButtonYPos + appData.buttonHeight / 1.5
 
     -- Position Erase Button
-    eraseButton.x = display.contentWidth - appData.buttonWidth  / 4
-    eraseButton.y = bottomY - appData.buttonHeight / 1.5
+    eraseButton.x = display.contentWidth / 2 + appData.buttonWidth
+    eraseButton.y = digitUpButtonYPos + appData.buttonHeight / 1.5
+
 
     --------------------------------------------------------------------|
    

@@ -21,24 +21,33 @@ speedTextOptions = { text = "x1", fontSize = 28, }
 
 
 --------------- BUTTON FUNCTIONS ---------------------------|
+local function resetGameUI()
+    resetData(appData)
+    resetCounter()
+    pauseIcon.alpha = 0
+    playIcon.alpha = 1
+    isRunning = false
+end
+
+
 
 local function onStartButtonTap(self)
     if isRunning then
         isRunning = false
-        startButton:setLabel("Start")
+        pauseIcon.alpha = 0
+        playIcon.alpha = 1
         pauseSimulation(gameScene)
     else
         isRunning = true
-        startButton:setLabel("Pause")
+        pauseIcon.alpha = 1
+        playIcon.alpha = 0
         startSimulation(gameScene)
     end
-    -- Additional code for handling start/stop logic
 end
-
 
 local function onResetButtonTap(self)
     print("Reset")
-    resetData(appData)
+    resetGameUI()
     composer.gotoScene("gameScene") -- Reload Scene
 end
 
@@ -61,12 +70,13 @@ local function onSpeedDownButtonTap(self)
 end
 
 local function onSaveButtonTap(self)
-    resetData(appData)
+    resetGameUI()
     local transitionOptions = { effect = "fromBottom", time = 500, }
     composer.gotoScene("saveScene", transitionOptions)
 end
 
 local function onLoadButtonTap(self)
+    resetGameUI()
     local transitionOptions = { effect = "fromTop", time = 500, }
     composer.gotoScene("loadScene", transitionOptions)
 end
@@ -82,19 +92,38 @@ function UI.createUI()
     
     --============== CREATING BUTTONS ====================================|
 
-    -- START/STOP BUTTON --
+    -- PLAY / PAUSE BUTTON --
+
+    -- Create Icons
+    playIcon = display.newImage("icons/PlayIcon.png")
+    playIcon.width = appData.buttonWidth / 2
+    playIcon.height = appData.buttonWidth / 2
+    playIcon:setFillColor(unpack(appData.iconColor))
+    pauseIcon = display.newImage("icons/PauseIcon.png")
+    pauseIcon.width = appData.buttonWidth / 2
+    pauseIcon.height = appData.buttonWidth / 2
+    pauseIcon:setFillColor(unpack(appData.iconColor))
+
+    -- Create Button
     startButton = widget.newButton({
-        width = appData.buttonWidth ,    
-        height = appData.buttonHeight,
-        label = "Start",
-        fontSize = 16,
-        labelColor = { default={1,1,1}, over={0.5,0.5,0.5} },
-        shape = "roundedRect",
-        fillColor = { default={0.2,0.6,0.2,1}, over={0.2,0.6,0.2,0.6} },
+        width = appData.buttonWidth / 2,    
+        height = appData.buttonHeight * 2,
         onRelease = function(event)
             onStartButtonTap(self)
         end
     })
+    
+    -- Position Icons
+    playIcon.x = startButton.width / 2
+    playIcon.y = startButton.height / 2
+    startButton:insert(playIcon)
+    pauseIcon.x = startButton.width / 2
+    pauseIcon.y = startButton.height / 2
+    startButton:insert(pauseIcon)
+
+    pauseIcon.alpha = 0
+
+
 
    -- RESET BUTTON -- 
    local resetButton = widget.newButton({
@@ -142,9 +171,10 @@ function UI.createUI()
     })
 
     -- SAVE BUTTON -- 
-    local saveIcon = display.newImage("SaveIcon.png")
+    local saveIcon = display.newImage("icons/UploadIcon.png")
     saveIcon.width = appData.buttonWidth  / 4
     saveIcon.height = appData.buttonWidth  / 4
+    saveIcon:setFillColor(unpack(appData.iconColor))
 
     local saveButton = widget.newButton({
         width = appData.buttonWidth  / 4,    
@@ -160,9 +190,10 @@ function UI.createUI()
 
 
    -- LOAD BUTTON -- 
-   local loadIcon = display.newImage("LoadIcon.png")
+   local loadIcon = display.newImage("icons/DownloadIcon.png")
    loadIcon.width = appData.buttonWidth  / 4
    loadIcon.height = appData.buttonWidth  / 4
+   loadIcon:setFillColor(unpack(appData.iconColor))
 
    local loadButton = widget.newButton({
        width = appData.buttonWidth  / 4,    
@@ -180,8 +211,6 @@ function UI.createUI()
 
 
 
-
-
     -------------- POSITIONING BUTTONS ----------------------------------|
 
     -- Calculate the bottom position
@@ -192,25 +221,29 @@ function UI.createUI()
     resetButton.y = bottomY - appData.buttonHeight * 1.25
 
     startButton.x = display.contentWidth / 2
-    startButton.y = bottomY - (appData.buttonHeight * 2.5)
+    startButton.y = bottomY - (appData.buttonHeight * 4.25)
+
 
     speedUpButton.x = (display.contentWidth / 2) + appData.buttonWidth  / 2.75
-    speedUpButton.y = bottomY - (appData.buttonHeight * 4)
+    speedUpButton.y = bottomY - (appData.buttonHeight * 2.5)
 
     speedText.x = display.contentWidth / 2
-    speedText.y = bottomY - (appData.buttonHeight * 4)
+    speedText.y = bottomY - (appData.buttonHeight * 2.5)
 
     speedDownButton.x = (display.contentWidth / 2) - appData.buttonWidth  / 2.75
-    speedDownButton.y = bottomY - (appData.buttonHeight * 4)
+    speedDownButton.y = bottomY - (appData.buttonHeight * 2.5)
+
 
     saveButton.x = appData.buttonWidth  / 4 
-    saveButton.y = bottomY - appData.buttonHeight / 1.5
+    saveButton.y = bottomY - appData.buttonHeight * 1.25
     
     loadButton.x = display.contentWidth - appData.buttonWidth  / 4
-    loadButton.y = bottomY - appData.buttonHeight / 1.5
+    loadButton.y = bottomY - appData.buttonHeight * 1.25
 
     --------------------------------------------------------------------|
    
+
+
     -- Insert Buttons into UIGroup
     uiGroup:insert(startButton) 
     uiGroup:insert(resetButton) 

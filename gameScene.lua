@@ -54,7 +54,7 @@ local function createGameBoard(group)
 
     -- Center the gameBoard
     gameBoard.x = display.contentCenterX - (cellSize * (appData.gridSize - 1)) / 2
-    gameBoard.y = display.contentCenterY - gameBoard.height / 1.5
+    gameBoard.y = (display.contentCenterY - (cellSize * (appData.gridSize - 1)) / 2) - (appData.buttonHeight * 2)
 
     -- Display & position step text 
     stepText = display.newText(stepTextOptions)
@@ -212,7 +212,7 @@ function scene:create(event)
 
     -- Background
     local background = display.newRect(sceneGroup, display.contentCenterX, display.contentCenterY, display.actualContentWidth, display.actualContentHeight)
-    background:setFillColor(1, 0, 1)
+    background:setFillColor(unpack(appData.backgroundColor))
 
     -- Title Text
     local textOptions = {

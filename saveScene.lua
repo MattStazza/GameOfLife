@@ -47,7 +47,7 @@ local function createBoard(group)
 
     -- Center the Board
     board.x = display.contentCenterX - (cellSize * (appData.gridSize - 1)) / 2
-    board.y = display.contentCenterY - board.height / 1.5
+    board.y = (display.contentCenterY - (cellSize * (appData.gridSize - 1)) / 2) - (appData.buttonHeight * 2)
 
     -- Insert the Board into the Scene
     group:insert(board) 
@@ -90,7 +90,7 @@ function scene:create(event)
 
     -- Background
     local background = display.newRect(sceneGroup, display.contentCenterX, display.contentCenterY, display.actualContentWidth, display.actualContentHeight)
-    background:setFillColor(0, 1, 0.5)
+    background:setFillColor(unpack(appData.backgroundColor))
 
     -- Title Text
     local textOptions = {
@@ -132,7 +132,6 @@ function scene:hide(event)
         -- Called when the scene is on screen and is about to move off screen
     elseif phase == "did" then
         -- Called when the scene has moved off screen
-        updateCellSizeModifier(appData)
         resetCells()
     end
 end

@@ -44,16 +44,12 @@ function loadGameBoard()
         file:close()
         appData.gridSize = gridSize
         appData.cells = cells
-        updateCellSizeModifier(appData)
         print("Gameboard Loaded. FileID: " .. fileID)
-    
       else
       print("Error: Unable to open file: " .. errorString)
     end
 
 end
-
-
 
 
 function loadSpecificGameboard() 
@@ -83,7 +79,6 @@ function loadSpecificGameboard()
     file:close()
     appData.gridSize = gridSize
     appData.cells = cells
-    updateCellSizeModifier(appData)
     print("Gameboard Loaded. FileID: " .. id)
 
 end
