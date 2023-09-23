@@ -8,20 +8,23 @@ local UI = {}
 
 local count = 1
 local totalPresets = 0
+local openingLoadScene = true
 
 local presetIndicatorText
-presetIndicatorTextTextOptions = { text = "No Presets", fontSize = 28, font = "TR-909.ttf",}
+presetIndicatorTextTextOptions = { text = "No Presets", fontSize = 24, font = "TR-909.ttf",}
 
 --------------- BUTTON FUNCTIONS ---------------------------|
 
 local function onLoadButtonTap(self)
     print("Load")
+    LeavingLoadScene()
     local transitionOptions = { effect = "fade", time = 500, }
     composer.gotoScene("gameScene", transitionOptions)
 end
 
 local function onCloseButtonTap(self)
     print("Close")
+    LeavingLoadScene()
     resetData(appData)
     local transitionOptions = { effect = "slideUp", time = 750, }
     composer.gotoScene("gameScene", transitionOptions)
@@ -57,6 +60,7 @@ end
 
 
 function loadCurrentPreset()
+    openingLoadScene = false
     appData.fileIDToLoad = count - 1
     loadSpecificGameboard(loader)   
     composer.gotoScene("loadScene") -- Reload the Scene to see changes
@@ -65,7 +69,7 @@ end
 
 function setTotalNumberOfSaveFiles()
     
-    local path = system.pathForFile("saveID.txt", system.DocumentsDirectory)
+    local path = system.pathForFile("fileID.txt", system.DocumentsDirectory)
     local file, errorString = io.open( path, "r" )
   
     if file then
@@ -80,6 +84,21 @@ function setTotalNumberOfSaveFiles()
     else
         presetIndicatorText.text = count .. " / " .. totalPresets
     end
+end
+
+-- This loads the first save when the user opens the Load Scene
+function EnteringLoadScene()
+    if totalPresets == 0 then
+        return
+    end
+    if openingLoadScene then
+        appData.fileIDToLoad = count - 1
+        loadSpecificGameboard(loader)   
+    end
+end
+function LeavingLoadScene()
+    count = 1
+    openingLoadScene = true
 end
 
 
@@ -128,7 +147,7 @@ function UI.createUI()
 
     
     -- LEFT BUTTON -- 
-    local leftIcon = display.newImage("icons/LeftIcon.png")
+    local leftIcon = display.newImage("icons/leftIcon.png")
     leftIcon.width = appData.buttonWidth / 4
     leftIcon.height = appData.buttonWidth / 4
     leftIcon:setFillColor(unpack(appData.iconColor))
@@ -148,7 +167,7 @@ function UI.createUI()
 
 
     -- RIGHT BUTTON -- 
-    local rightIcon = display.newImage("icons/RightIcon.png")
+    local rightIcon = display.newImage("icons/rightIcon.png")
     rightIcon.width = appData.buttonWidth  / 4
     rightIcon.height = appData.buttonWidth  / 4
     rightIcon:setFillColor(unpack(appData.iconColor))

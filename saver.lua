@@ -1,41 +1,41 @@
 local appData = require("data")
-local saveID
+local fileID
 
 
-local function setSaveID()
+local function setFileID()
 
-  local path = system.pathForFile("saveID.txt", system.DocumentsDirectory)
+  local path = system.pathForFile("fileID.txt", system.DocumentsDirectory)
   local file, errorString = io.open( path, "r" )
 
-  -- If the file doesn't exist... Set SaveID & create new file.
+  -- If the file doesn't exist... Set FileID & create new file.
   if errorString then
     local file, errorString = io.open( path, "w" )
-    saveID = 0
-    file:write(tostring(saveID))
+    fileID = 0
+    file:write(tostring(fileID))
     file:close()
   end
 
   if file then
-    saveID = tonumber(file:read("*a") or 0)
+    fileID = tonumber(file:read("*a") or 0)
     file:close()
   else
-    print("Can't find saveID file: " .. errorString)
+    print("Can't find fileID file: " .. errorString)
   end
 end
 
 
 
-local function incrementSaveID()
-  saveID = saveID + 1
+local function incrementFileID()
+  fileID = fileID + 1
 
-  local path = system.pathForFile("saveID.txt", system.DocumentsDirectory)
+  local path = system.pathForFile("fileID.txt", system.DocumentsDirectory)
   local file, errorString = io.open( path, "w" )
 
   if file then
-    file:write(saveID)
+    file:write(fileID)
     file:close()
   else
-    print("Couldn't increment SaveID: " .. errorString)
+    print("Couldn't increment FileID: " .. errorString)
   end
 
 end
@@ -44,9 +44,9 @@ end
 -- Function to save the gameboard to a text file
 function saveGameBoard()
 
-  setSaveID()
+  setFileID()
 
-  local path = system.pathForFile("gameboard" .. tostring(saveID) .. ".txt", system.DocumentsDirectory)
+  local path = system.pathForFile("gameboard" .. tostring(fileID) .. ".txt", system.DocumentsDirectory)
   local file, errorString = io.open( path, "w" )
 
   if file then
@@ -71,8 +71,8 @@ function saveGameBoard()
       end
   end
       
-    incrementSaveID()
-    print("Gameboard Saved. FileID: " .. saveID - 1)
+    incrementFileID()
+    print("Gameboard Saved. FileID: " .. fileID - 1)
     file:close()
 
   else

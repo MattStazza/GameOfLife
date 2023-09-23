@@ -5,7 +5,7 @@ local fileID
 -- Text File always valid because the Save function runs before
 function setFileID()
 
-    local path = system.pathForFile("saveID.txt", system.DocumentsDirectory)
+    local path = system.pathForFile("fileID.txt", system.DocumentsDirectory)
     local file, errorString = io.open( path, "r" )
   
     if file then

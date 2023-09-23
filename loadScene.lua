@@ -41,6 +41,7 @@ local function createBoard(group)
 
     -- Load Cells
     for index, cell in ipairs(appData.cells) do
+        disableCell(cells[index])
         if cell.isAlive then
            makeAlive(cells[index])
         else
@@ -96,6 +97,7 @@ function scene:show(event)
 
     if phase == "will" then
         -- Called when the scene is about to come on screen
+        EnteringLoadScene()
         createBoard(sceneGroup)
         setTotalNumberOfSaveFiles()
     elseif phase == "did" then

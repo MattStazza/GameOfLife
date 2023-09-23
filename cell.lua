@@ -17,11 +17,17 @@ function makeAlive(self)
 end
 
 function toggleCell(self)
-    if self.isAlive then
-        makeDead(self)
-    else
-        makeAlive(self)
+    if self.isInteractable then
+        if self.isAlive then
+            makeDead(self)
+        else
+            makeAlive(self)
+        end
     end
+end
+
+function disableCell(self)
+    self.isInteractable = false
 end
 
 function Cell.new(x, y, size)
@@ -34,6 +40,7 @@ function Cell.new(x, y, size)
     self.fill.effect.position2  = { 0.5, 1 }
 
     self.isAlive = false
+    self.isInteractable = true;
 
     function self:tap(event)
         toggleCell(self)
