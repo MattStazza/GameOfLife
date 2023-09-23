@@ -34,6 +34,7 @@ local function createBoard(group)
             local newCell = Cell.new(x, y, cellSize)   
             local index = (row - 1) * appData.gridSize + col
             cells[index] = newCell -- Insert the cell into the cells table
+            disableCell(newCell)
 
             board:insert(newCell) -- Insert the cell into the gameBoard group
         end
@@ -41,7 +42,6 @@ local function createBoard(group)
 
     -- Load Cells
     for index, cell in ipairs(appData.cells) do
-        disableCell(cells[index])
         if cell.isAlive then
            makeAlive(cells[index])
         else
