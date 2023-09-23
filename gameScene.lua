@@ -10,7 +10,7 @@ local UI = require("gameUserInterface")
 local running = false
 local stepCount = 0
 local stepText
-local stepTextOptions = { text = "0", fontSize = 15, }
+local stepTextOptions = { text = "0", fontSize = 15, font = "TR-909.ttf"}
 
 -----------------------------------------------------
 
@@ -216,11 +216,11 @@ function scene:create(event)
 
     -- Title Text
     local textOptions = {
-        text = "Game of Life!",
+        text = "Game of Life",
         x = display.contentWidth / 2,
-        y = 25, -- down from top top
-        font = native.systemFont,
-        fontSize = 24,
+        y = 35, 
+        font = "TR-909.ttf",
+        fontSize = 28,
     }
     titleText = display.newText(textOptions)
     sceneGroup:insert(titleText)

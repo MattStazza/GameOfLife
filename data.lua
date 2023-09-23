@@ -15,7 +15,7 @@ M.buttonHeight = 30
 M.buttonWidth = 100
 M.iconColor = {1, 1, 1}
 M.backgroundColor = {0.1, 0.1, 0.1}
-M.backgroundColor2 = {0.1, 0.3, 0.5}
+M.backgroundColor2 = {0.2, 0, 0.3}
 
 
 function resetData()

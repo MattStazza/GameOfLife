@@ -58,7 +58,8 @@ end
 function randomiseCells()
     for index, cell in ipairs(cells) do
 
-        random = math.random(1, 4)
+        chance = math.random(2, 15)
+        random = math.random(1, chance)
 
         if (random == 1) then
             makeAlive(cell)
@@ -94,11 +95,11 @@ function scene:create(event)
 
     -- Title Text
     local textOptions = {
-        text = "Create a Preset!",
+        text = "Create a Preset",
         x = display.contentWidth / 2,
-        y = 25, -- down from top top
-        font = native.systemFont,
-        fontSize = 24,
+        y = 35, 
+        font = "TR-909.ttf",
+        fontSize = 22,
     }
     local infoText = display.newText(textOptions)
     sceneGroup:insert(infoText)

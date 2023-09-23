@@ -1,5 +1,6 @@
 -- Import the necessary libraries -----
 local composer = require("composer")
+local appData = require("data")
 local scene = composer.newScene()
 ---------------------------------------
 
@@ -12,18 +13,43 @@ function scene:create(event)
 
     -- Example background
     local background = display.newRect(sceneGroup, display.contentCenterX, display.contentCenterY, display.actualContentWidth, display.actualContentHeight)
-    background:setFillColor(0.5, 0.5, 0.5)
+    background:setFillColor(unpack(appData.backgroundColor2))
 
-    -- Example text
+    -- Splash Screen Title Text
     local textOptions = {
-        text = "Splash Screen!",
+        text = "GAME\nOF LIFE",
         x = display.contentCenterX,
-        y = display.contentCenterY,
-        font = native.systemFont,
-        fontSize = 24,
+        y = 80,
+        font = "TR-909.ttf",
+        fontSize = 50,
     }
-    local helloText = display.newText(textOptions)
-    sceneGroup:insert(helloText)
+    local TitleText = display.newText(textOptions)
+    sceneGroup:insert(TitleText)
+    
+
+    -- GAME APP BUTTON -- 
+    local gameAppIcon = display.newImage("icons/GameAppIcon.png")
+    gameAppIcon.width = appData.buttonWidth * 2
+    gameAppIcon.height = appData.buttonWidth * 2
+    gameAppIcon:setFillColor(unpack(appData.iconColor))
+
+    sceneGroup:insert(gameAppIcon)   
+    gameAppIcon.x = display.contentWidth / 2
+    gameAppIcon.y = display.contentHeight / 1.75
+
+    sceneGroup:insert(gameAppIcon)  
+
+
+    -- Splash Screen Information Text
+    local textOptions = {
+        text = "DEVELOPED BY:\nMATTHEW STASINOWSKY\n\n2023",
+        x = display.contentCenterX,
+        y = display.contentHeight - 10,
+        font = "TR-909.ttf",
+        fontSize = 15,
+    }
+    local InformationText = display.newText(textOptions)
+    sceneGroup:insert(InformationText)
 end
 
 

@@ -13,7 +13,7 @@ local tenDigit = 0
 local tenDigitText
 local hundredDigit = 0
 local hundredDigitText
-digitTextOptions = { text = "0", fontSize = 28, }
+digitTextOptions = { text = "0", fontSize = 28, font = "TR-909.ttf"}
 
 local customGridSize = 0
 
@@ -36,7 +36,7 @@ local function onCloseButtonTap(self)
     resetDigits()
     appData.gridSize = 5
     appData.cells = {}
-    local transitionOptions = { effect = "slideDown", time = 500, }
+    local transitionOptions = { effect = "slideDown", time = 750, }
     composer.gotoScene("gameScene", transitionOptions)
 end
 
@@ -163,11 +163,12 @@ function UI.createUI()
     saveButton = widget.newButton({
         width = appData.buttonWidth ,    
         height = appData.buttonHeight,
-        label = "Save & Load",
+        label = "SAVE",
+        font = "TR-909.ttf",
         fontSize = 16,
-        labelColor = { default={1,1,1}, over={0.5,0.5,0.5} },
+        labelColor = { default={0,0,0}, over={0,0,0} },
         shape = "roundedRect",
-        fillColor = { default={0.2,0.6,0.2,1}, over={0.2,0.6,0.2,0.6} },
+        fillColor = { default={1, 0.5, 1}, over={0.5, 0.5, 0.5} },
         onRelease = function(event)
             onSaveButtonTap(self)
         end
@@ -177,11 +178,12 @@ function UI.createUI()
    local closeButton = widget.newButton({
         width = appData.buttonWidth ,    
         height = appData.buttonHeight,
-        label = "Close",
+        label = "CLOSE",
+        font = "TR-909.ttf",
         fontSize = 16,
-        labelColor = { default={1,1,1}, over={0.5,0.5,0.5} },
+        labelColor = { default={0,0,0}, over={0,0,0} },
         shape = "roundedRect",
-        fillColor = { default={1,0,0,1}, over={0.2,0.6,0.2,0.6} },
+        fillColor = { default={1,1,1,1}, over={0.5,0.5,0.5, 1} },
         onRelease = function(event)
             onCloseButtonTap(self)
         end
@@ -392,7 +394,7 @@ function UI.createUI()
     randomiseButton.y = digitUpButtonYPos + appData.buttonHeight / 1.5
 
     -- Position Erase Button
-    eraseButton.x = display.contentWidth / 2 + appData.buttonWidth
+    eraseButton.x = display.contentWidth / 2.25 + appData.buttonWidth
     eraseButton.y = digitUpButtonYPos + appData.buttonHeight / 1.5
 
 

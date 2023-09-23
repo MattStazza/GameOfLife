@@ -10,7 +10,7 @@ local count = 1
 local totalPresets = 0
 
 local presetIndicatorText
-presetIndicatorTextTextOptions = { text = "No Presets", fontSize = 28, }
+presetIndicatorTextTextOptions = { text = "No Presets", fontSize = 28, font = "TR-909.ttf",}
 
 --------------- BUTTON FUNCTIONS ---------------------------|
 
@@ -23,7 +23,7 @@ end
 local function onCloseButtonTap(self)
     print("Close")
     resetData(appData)
-    local transitionOptions = { effect = "slideUp", time = 500, }
+    local transitionOptions = { effect = "slideUp", time = 750, }
     composer.gotoScene("gameScene", transitionOptions)
 end
 
@@ -96,11 +96,12 @@ function UI.createUI()
     loadButton = widget.newButton({
         width = appData.buttonWidth  ,    
         height = appData.buttonHeight,
-        label = "Load",
+        label = "LOAD",
+        font = "TR-909.ttf",
         fontSize = 16,
-        labelColor = { default={1,1,1}, over={0.5,0.5,0.5} },
+        labelColor = { default={0,0,0}, over={0,0,0} },
         shape = "roundedRect",
-        fillColor = { default={0.2,0.6,0.2,1}, over={0.2,0.6,0.2,0.6} },
+        fillColor = { default={1, 0.5, 1}, over={0.5, 0.5, 0.5} },
         onRelease = function(event)
             onLoadButtonTap(self)
         end
@@ -111,11 +112,12 @@ function UI.createUI()
    local closeButton = widget.newButton({
         width = appData.buttonWidth  ,    
         height = appData.buttonHeight,
-        label = "Close",
+        label = "CLOSE",
+        font = "TR-909.ttf",
         fontSize = 16,
-        labelColor = { default={1,1,1}, over={0.5,0.5,0.5} },
+        labelColor = { default={0,0,0}, over={0,0,0} },
         shape = "roundedRect",
-        fillColor = { default={1,0,0,1}, over={0.2,0.6,0.2,0.6} },
+        fillColor = { default={1,1,1,1}, over={0.5,0.5,0.5, 1} },
         onRelease = function(event)
             onCloseButtonTap(self)
         end

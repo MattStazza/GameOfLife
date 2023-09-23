@@ -3,7 +3,7 @@ local appData = require("data")
 
 local Cell = {}
 
-local ALIVE_COLOR = {0, 1, 0} 
+local ALIVE_COLOR = {1, 0.5, 1} 
 local DEAD_COLOR = {1, 1, 1}
 
 function makeDead(self)

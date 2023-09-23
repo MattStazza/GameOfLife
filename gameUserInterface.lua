@@ -16,7 +16,7 @@ local startButton
 local isRunning = false
 
 local speedText
-speedTextOptions = { text = "x1", fontSize = 28, }
+speedTextOptions = { text = "x1", fontSize = 24, font = "TR-909.ttf" }
 
 
 
@@ -71,13 +71,13 @@ end
 
 local function onSaveButtonTap(self)
     resetGameUI()
-    local transitionOptions = { effect = "fromBottom", time = 500, }
+    local transitionOptions = { effect = "fromBottom", time = 750, }
     composer.gotoScene("saveScene", transitionOptions)
 end
 
 local function onLoadButtonTap(self)
     resetGameUI()
-    local transitionOptions = { effect = "fromTop", time = 500, }
+    local transitionOptions = { effect = "fromTop", time = 750, }
     composer.gotoScene("loadScene", transitionOptions)
 end
 
@@ -129,11 +129,12 @@ function UI.createUI()
    local resetButton = widget.newButton({
         width = appData.buttonWidth ,    
         height = appData.buttonHeight,
-        label = "Reset",
+        label = "RESET",
+        font = "TR-909.ttf",
         fontSize = 16,
-        labelColor = { default={1,1,1}, over={0.5,0.5,0.5} },
+        labelColor = { default={0,0,0}, over={0,0,0} },
         shape = "roundedRect",
-        fillColor = { default={1,0,0,1}, over={0.2,0.6,0.2,0.6} },
+        fillColor = { default={1, 0.5, 1}, over={0.5, 0.5, 0.5} },
         onRelease = function(event)
             onResetButtonTap(self)
         end
@@ -144,13 +145,13 @@ function UI.createUI()
 
     -- SPEED UP BUTTON -- 
    local speedUpButton = widget.newButton({
-        width = appData.buttonWidth  / 4,    
-        height = appData.buttonHeight,
+        width = appData.buttonWidth / 4,    
+        height = appData.buttonHeight / 1.25,
         label = "+",
         fontSize = 32,
         labelColor = { default={0,0,0}, over={0.5,0.5,0.5} },
         shape = "roundedRect",
-        fillColor = { default={1,1,1,1}, over={0.2,0.6,0.2,0.6} },
+        fillColor = { default={1,1,1,1}, over={0.5,0.5,0.5, 1} },
         onRelease = function(event)
             onSpeedUpButtonTap(self)
         end
@@ -158,13 +159,13 @@ function UI.createUI()
 
     -- SPEED DOWN BUTTON -- 
     local speedDownButton = widget.newButton({
-        width = appData.buttonWidth  / 4,    
-        height = appData.buttonHeight,
+        width = appData.buttonWidth / 4,    
+        height = appData.buttonHeight / 1.25,
         label = "-",
         fontSize = 32,
         labelColor = { default={0,0,0}, over={0.5,0.5,0.5} },
         shape = "roundedRect",
-        fillColor = { default={1,1,1,1}, over={0.2,0.6,0.2,0.6} },
+        fillColor = { default={1,1,1,1}, over={0.5,0.5,0.5, 1} },
         onRelease = function(event)
             onSpeedDownButtonTap(self)
         end

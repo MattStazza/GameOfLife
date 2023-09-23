@@ -75,11 +75,11 @@ function scene:create(event)
 
     -- Title Text
     local textOptions = {
-        text = "Load a Preset!",
+        text = "Load a Preset",
         x = display.contentWidth / 2,
-        y = 25, -- down from top top
-        font = native.systemFont,
-        fontSize = 24,
+        y = 35, 
+        font = "TR-909.ttf",
+        fontSize = 25,
     }
     local infoText = display.newText(textOptions)
     sceneGroup:insert(infoText)
