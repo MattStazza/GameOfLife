@@ -7,10 +7,14 @@ local Cell = require("cell")
 local UI = require("gameUserInterface")
 -----------------------------------------------------
 
-local running = false
-local stepCount = 0
+gameSceneData = {}
+gameSceneData.stepCount = 0
+gameSceneData.running = false
+
+--local running = false
+--local stepCount = 0
 local stepText
-local stepTextOptions = { text = "0", fontSize = 15, font = "TR-909.ttf"}
+local stepTextOptions = { text = gameSceneData.stepCount, fontSize = 15, font = "TR-909.ttf"}
 
 -----------------------------------------------------
 
@@ -102,7 +106,7 @@ end
 function startSimulation()
 
     print("Started")
-    running = true
+    gameSceneData.running = true
 
     local dyingCells = {}
     local rebornCells = {}
@@ -127,12 +131,12 @@ function startSimulation()
 
     local function simulationStep()
 
-        if not running then
+        if not gameSceneData.running then
             return
         end
         
-        stepCount = stepCount + 1
-        stepText.text = stepCount
+        gameSceneData.stepCount = gameSceneData.stepCount + 1
+        stepText.text = gameSceneData.stepCount
 
         for index, cell in ipairs(cells) do
             
@@ -179,14 +183,12 @@ end
 
 
 function pauseSimulation()
-    print("Paused")
-    running = false
+    gameSceneData.running = false
 end
 
 
 function resetCounter()
-    stepCount = 0
-    stepText.text = stepCount
+    gameSceneData.stepCount = 0
 end
 
 
@@ -240,6 +242,9 @@ function scene:show(event)
         createGameBoard(sceneGroup)
     elseif phase == "did" then
         -- Called when the scene is now on screen
+        print("--- Unit tests start here ---")
+        lunatest.suite("unit-tests") 
+        lunatest.run()
     end
 end
 
