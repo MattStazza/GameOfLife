@@ -1,6 +1,6 @@
 -- Import the necessary libraries -----
-local scene = composer.newScene()
 local composer = require("composer")
+local scene = composer.newScene()
 local appData = require("data")
 local Cell = require("cell")
 local UI = require("saveUserInterface")

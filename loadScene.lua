@@ -1,6 +1,6 @@
 -- Import the necessary libraries -----
-local scene = composer.newScene()
 local composer = require("composer")
+local scene = composer.newScene()
 local appData = require("data")
 local loader = require("loader")
 local Cell = require("cell")
