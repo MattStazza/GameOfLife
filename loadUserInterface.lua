@@ -9,7 +9,6 @@ local UI = {}
 local count = 1
 local totalPresets = 0
 local openingLoadScene = true
-
 local presetIndicatorText
 presetIndicatorTextTextOptions = { text = "No Presets", fontSize = 24, font = "TR-909.ttf",}
 
@@ -57,8 +56,6 @@ end
 ---------------------------------------------------------------|
 
 
-
-
 function loadCurrentPreset()
     openingLoadScene = false
     appData.fileIDToLoad = count - 1
@@ -102,9 +99,6 @@ function LeavingLoadScene()
 end
 
 
-
-
-
 function UI.createUI()
     
     local uiGroup = display.newGroup()
@@ -126,7 +120,6 @@ function UI.createUI()
         end
     })
 
-
     -- CLOSE BUTTON -- 
    local closeButton = widget.newButton({
         width = appData.buttonWidth  ,    
@@ -142,10 +135,8 @@ function UI.createUI()
         end
     })
 
-
     -------------------------------------------------------------------
 
-    
     -- LEFT BUTTON -- 
     local leftIcon = display.newImage("icons/leftIcon.png")
     leftIcon.width = appData.buttonWidth / 4
@@ -163,8 +154,6 @@ function UI.createUI()
     leftIcon.x = leftButton.width / 2
     leftIcon.y = leftButton.height / 2
     leftButton:insert(leftIcon)
-
-
 
     -- RIGHT BUTTON -- 
     local rightIcon = display.newImage("icons/rightIcon.png")
@@ -184,16 +173,13 @@ function UI.createUI()
     rightIcon.y = rightButton.height / 2
     rightButton:insert(rightIcon)
 
-
     -------------------------------------------------------------------
-
 
     -- FILE INDICATOR TEXT
     presetIndicatorText = display.newText(presetIndicatorTextTextOptions)
     setTotalNumberOfSaveFiles()
 
     --===================================================================|
-
 
 
     -------------- POSITIONING BUTTONS ----------------------------------|
@@ -220,7 +206,6 @@ function UI.createUI()
     --------------------------------------------------------------------|
    
 
-
     -- Insert Buttons into UIGroup
     uiGroup:insert(loadButton) 
     uiGroup:insert(closeButton)
@@ -231,7 +216,5 @@ function UI.createUI()
     return uiGroup
 
 end
-
-
 
 return UI

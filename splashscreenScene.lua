@@ -4,9 +4,6 @@ local appData = require("data")
 local scene = composer.newScene()
 ---------------------------------------
 
-
-
-
 -- CREATE SCENE
 function scene:create(event)
     local sceneGroup = self.view
@@ -85,8 +82,6 @@ function scene:destroy(event)
 
     -- Clean up any resources used by the scene
 end
-
-
 
 
 -- Event Listeners --------------------------

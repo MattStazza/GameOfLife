@@ -9,8 +9,6 @@ local UI = {}
 local BUTTON_WIDTH = appData.buttonWidth    
 local BUTTON_HEIGHT = appData.buttonHeight
 
-
-
 -- Initialise Variables (used in functions so need to be declared earlier)
 local startButton
 local isRunning = false
@@ -19,8 +17,7 @@ local speedText
 speedTextOptions = { text = "x1", fontSize = 24, font = "TR-909.ttf" }
 
 
-
---------------- BUTTON FUNCTIONS ---------------------------|
+--------------------------- BUTTON FUNCTIONS ---------------------------|
 local function resetGameUI()
     resetData(appData)
     resetCounter()
@@ -28,8 +25,6 @@ local function resetGameUI()
     playIcon.alpha = 1
     isRunning = false
 end
-
-
 
 local function onStartButtonTap(self)
     if isRunning then
@@ -81,9 +76,7 @@ local function onLoadButtonTap(self)
     composer.gotoScene("loadScene", transitionOptions)
 end
 
----------------------------------------------------------------|
-
-
+----------------------------------------------------------------------|
 
 
 function UI.createUI()
@@ -91,7 +84,6 @@ function UI.createUI()
     local uiGroup = display.newGroup()
     
     --============== CREATING BUTTONS ====================================|
-
     -- PLAY / PAUSE BUTTON --
 
     -- Create Icons
@@ -122,7 +114,6 @@ function UI.createUI()
     startButton:insert(pauseIcon)
 
     pauseIcon.alpha = 0
-
 
 
    -- RESET BUTTON -- 
@@ -171,6 +162,7 @@ function UI.createUI()
         end
     })
 
+
     -- SAVE BUTTON -- 
     local saveIcon = display.newImage("icons/UploadIcon.png")
     saveIcon.width = appData.buttonWidth  / 4
@@ -211,7 +203,6 @@ function UI.createUI()
     --===================================================================|
 
 
-
     -------------- POSITIONING BUTTONS ----------------------------------|
 
     -- Calculate the bottom position
@@ -224,7 +215,6 @@ function UI.createUI()
     startButton.x = display.contentWidth / 2
     startButton.y = bottomY - (appData.buttonHeight * 4.25)
 
-
     speedUpButton.x = (display.contentWidth / 2) + appData.buttonWidth  / 2.75
     speedUpButton.y = bottomY - (appData.buttonHeight * 2.5)
 
@@ -234,7 +224,6 @@ function UI.createUI()
     speedDownButton.x = (display.contentWidth / 2) - appData.buttonWidth  / 2.75
     speedDownButton.y = bottomY - (appData.buttonHeight * 2.5)
 
-
     saveButton.x = appData.buttonWidth  / 4 
     saveButton.y = bottomY - appData.buttonHeight * 1.25
     
@@ -243,7 +232,6 @@ function UI.createUI()
 
     --------------------------------------------------------------------|
    
-
 
     -- Insert Buttons into UIGroup
     uiGroup:insert(startButton) 
@@ -257,6 +245,5 @@ function UI.createUI()
     return uiGroup
 
 end
-
 
 return UI

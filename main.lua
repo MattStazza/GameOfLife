@@ -12,7 +12,5 @@ composer.gotoScene("splashscreenScene")
 -- Go to Game Scene after 3sec
 timer.performWithDelay(3000, goToGameScene)
 
-
 -- Import the test framework & run tests
 require("lunatest")
-

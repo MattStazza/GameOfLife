@@ -1,13 +1,11 @@
 -- Import the necessary libraries -----
-local composer = require("composer")
 local scene = composer.newScene()
-
+local composer = require("composer")
 local appData = require("data")
 local loader = require("loader")
 local Cell = require("cell")
 local UI = require("loadUserInterface")
 ---------------------------------------
-
 
 local function addUserInterface(group)
     ui = UI.createUI()
@@ -59,11 +57,9 @@ local function createBoard(group)
 end
 
 
-
 --===============================================================================================================================||
 --================================================- SCENE EVENT FUNCTIONS -======================================================||
 --===============================================================================================================================||
-
 
 
 -- CREATE SCENE
@@ -127,14 +123,11 @@ function scene:destroy(event)
 end
 
 
-
-
 -- Event Listeners --------------------------
 scene:addEventListener("create", scene)
 scene:addEventListener("show", scene)
 scene:addEventListener("hide", scene)
 scene:addEventListener("destroy", scene)
 -------------------------------------------------
-
 
 return scene

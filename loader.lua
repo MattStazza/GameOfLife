@@ -1,7 +1,6 @@
 local appData = require("data")
 local fileID
 
-
 -- Text File always valid because the Save function runs before
 function setFileID()
 
@@ -12,8 +11,7 @@ function setFileID()
         fileID = tonumber(file:read("*a") or 0) - 1 -- Need to remove 1 because SaveID has been incremented
         file:close()
     end
-  end
-
+end
 
 function loadGameBoard()
 
@@ -47,12 +45,11 @@ function loadGameBoard()
       else
       print("Error: Unable to open file: " .. errorString)
     end
-
 end
 
 
 function loadSpecificGameboard() 
-
+    
     local id = appData.fileIDToLoad
 
     local path = system.pathForFile("gameboard" .. tostring(id) .. ".txt", system.DocumentsDirectory)
@@ -79,5 +76,4 @@ function loadSpecificGameboard()
     appData.gridSize = gridSize
     appData.cells = cells
     print("Gameboard Loaded. FileID: " .. id)
-
 end

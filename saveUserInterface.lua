@@ -4,7 +4,6 @@ local appData = require("data")
 local saver = require("saver")
 local loader = require("loader")
 -------------------------------------------------------------
-
 local UI = {}
 
 local oneDigit = 5
@@ -14,11 +13,9 @@ local tenDigitText
 local hundredDigit = 0
 local hundredDigitText
 digitTextOptions = { text = "0", fontSize = 28, font = "TR-909.ttf"}
-
 local customGridSize = 0
 
-
---------------- BUTTON FUNCTIONS ---------------------------|
+------------------------------ BUTTON FUNCTIONS ---------------------------|
 
 local function onSaveButtonTap(self)
     saveGameBoard(saver)
@@ -130,11 +127,6 @@ local function updateGridSizeOnButtonTap(self)
 end
 
 
-
-
-
-
-
 function getCustomGridSize()
     customGridSize = tonumber(hundredDigit .. tenDigit .. oneDigit)
     return customGridSize
@@ -148,16 +140,14 @@ function resetDigits()
     hundredDigit = 0
     hundredDigitText.text = hundredDigit
 end
----------------------------------------------------------------|
-
-
+------------------------------------------------------------------------------|
 
 
 function UI.createUI()
     
     local uiGroup = display.newGroup()
     
-    --============== CREATING BUTTONS ====================================|
+    --================== CREATING BUTTONS ====================================|
 
     -- SAVE/LOAD BUTTON --
     saveButton = widget.newButton({
@@ -189,9 +179,7 @@ function UI.createUI()
         end
     })
 
-
-
-    --------------------- ONE DIGIT TEXT & BUTTONS ---------------------
+    --------------------- ONE DIGIT TEXT & BUTTONS ------------------------
     oneDigitText = display.newText(digitTextOptions)
 
     -- UP BUTTON -- 
@@ -224,7 +212,6 @@ function UI.createUI()
         end
     })
     --------------------------------------------------------------------
-
 
     --------------------- TEN DIGIT TEXT & BUTTONS ---------------------
     tenDigitText = display.newText(digitTextOptions)
@@ -260,8 +247,6 @@ function UI.createUI()
     })
     --------------------------------------------------------------------
 
-
-
     --------------------- HUNDRED DIGIT TEXT & BUTTONS -----------------
     hundredDigitText = display.newText(digitTextOptions)
 
@@ -296,15 +281,12 @@ function UI.createUI()
     })
     --------------------------------------------------------------------
 
-
-
     --------------------- RANDOMISE & CLEAR BUTTONS -----------------
     -- RANDOMISE BUTTON -- 
     local randomIcon = display.newImage("icons/RandomIcon.png")
     randomIcon.width = appData.buttonWidth  / 3
     randomIcon.height = appData.buttonWidth  / 3
     randomIcon:setFillColor(unpack(appData.iconColor))
-
 
     local randomiseButton = widget.newButton({
         width = appData.buttonWidth  / 4,    
@@ -325,7 +307,6 @@ function UI.createUI()
    eraseIcon.height = appData.buttonWidth  / 3
    eraseIcon:setFillColor(unpack(appData.iconColor))
 
-
    local eraseButton = widget.newButton({
        width = appData.buttonWidth / 4,    
        height = appData.buttonHeight,
@@ -338,25 +319,19 @@ function UI.createUI()
    eraseIcon.y = eraseButton.height / 2
    eraseButton:insert(eraseIcon)  
 
-    --------------------------------------------------------------------
-
     --===================================================================|
-
-
 
     -------------- POSITIONING BUTTONS ----------------------------------|
 
     -- Calculate the bottom position
     local bottomY = display.contentHeight
     
-
     -- Set the position of the button
     closeButton.x = display.contentWidth / 2
     closeButton.y = bottomY - (appData.buttonHeight * 1.25)
 
     saveButton.x = display.contentWidth / 2
     saveButton.y = bottomY - (appData.buttonHeight * 2.5)
-
 
     -- Position Digit Text & Buttons (shared variables)
     local xPos = display.contentWidth / 2
@@ -388,7 +363,6 @@ function UI.createUI()
     hundredDigitDownButton.x = xPos - appData.buttonWidth / 4
     hundredDigitDownButton.y = digitDownButtonYPos
 
-
     -- Position Randomise Button
     randomiseButton.x = display.contentWidth / 2 - appData.buttonWidth
     randomiseButton.y = digitUpButtonYPos + appData.buttonHeight / 1.5
@@ -397,10 +371,8 @@ function UI.createUI()
     eraseButton.x = display.contentWidth / 2.25 + appData.buttonWidth
     eraseButton.y = digitUpButtonYPos + appData.buttonHeight / 1.5
 
-
     --------------------------------------------------------------------|
    
-
     -- Insert Buttons into UIGroup
     uiGroup:insert(saveButton) 
     uiGroup:insert(closeButton)

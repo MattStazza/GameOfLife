@@ -1,16 +1,12 @@
 -- Import the necessary libraries -----
-local composer = require("composer")
 local scene = composer.newScene()
-
+local composer = require("composer")
 local appData = require("data")
 local Cell = require("cell")
 local UI = require("saveUserInterface")
----------------------------------------
-
-local cells = {}
 
 -----------------------------------------------------
-
+local cells = {}
 
 local function addUserInterface(group)
     ui = UI.createUI()
@@ -69,6 +65,7 @@ function randomiseCells()
     end
 end
 
+
 function resetCells()
     for index, cell in ipairs(cells) do
         if cell.isAlive then
@@ -78,11 +75,9 @@ function resetCells()
 end
 
 
-
 --===============================================================================================================================||
 --================================================- SCENE EVENT FUNCTIONS -======================================================||
 --===============================================================================================================================||
-
 
 
 -- CREATE SCENE
@@ -146,14 +141,11 @@ function scene:destroy(event)
 end
 
 
-
-
 -- Event Listeners --------------------------
 scene:addEventListener("create", scene)
 scene:addEventListener("show", scene)
 scene:addEventListener("hide", scene)
 scene:addEventListener("destroy", scene)
 -------------------------------------------------
-
 
 return scene

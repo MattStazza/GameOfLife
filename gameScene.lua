@@ -10,16 +10,10 @@ local UI = require("gameUserInterface")
 gameSceneData = {}
 gameSceneData.stepCount = 0
 gameSceneData.running = false
-
 local stepText
 local stepTextOptions = { text = gameSceneData.stepCount, fontSize = 15, font = "TR-909.ttf"}
-
------------------------------------------------------
-
-
-
-
 local cells = {}
+-----------------------------------------------------
 
 local function createGameBoard(group)
     
@@ -71,7 +65,6 @@ local function createGameBoard(group)
 end
 
 
-
 -- Returns the Indexs of the Cells neighbouring a specific Cell.
 function getCellsNeighbours(cellIndex)
     local neighbours = {}
@@ -99,9 +92,6 @@ function getCellsNeighbours(cellIndex)
 end
 
 
-
-
-
 function startSimulation()
 
     print("Started")
@@ -110,7 +100,6 @@ function startSimulation()
     local dyingCells = {}
     local rebornCells = {}
  
-
     local function updateCellStates()
         -- Make dying cells dead
         for _, index in ipairs(dyingCells) do
@@ -126,7 +115,6 @@ function startSimulation()
         dyingCells = {}
         rebornCells = {}
     end
-
 
     local function simulationStep()
 
@@ -191,20 +179,15 @@ function resetCounter()
 end
 
 
-
 local function addUserInterface(group)
     ui = UI.createUI()
     group:insert(ui) -- Insert UI into Scene
 end
 
 
-
-
 --===============================================================================================================================||
 --================================================- SCENE EVENT FUNCTIONS -======================================================||
 --===============================================================================================================================||
-
-
 
 
 -- CREATE SCENE
@@ -276,6 +259,5 @@ scene:addEventListener("show", scene)
 scene:addEventListener("hide", scene)
 scene:addEventListener("destroy", scene)
 -------------------------------------------------
-
 
 return scene

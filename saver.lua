@@ -1,7 +1,6 @@
 local appData = require("data")
 local fileID
 
-
 local function setFileID()
 
   local path = system.pathForFile("fileID.txt", system.DocumentsDirectory)
@@ -37,7 +36,6 @@ local function incrementFileID()
   else
     print("Couldn't increment FileID: " .. errorString)
   end
-
 end
 
 
