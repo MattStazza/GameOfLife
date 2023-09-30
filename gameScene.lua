@@ -11,8 +11,6 @@ gameSceneData = {}
 gameSceneData.stepCount = 0
 gameSceneData.running = false
 
---local running = false
---local stepCount = 0
 local stepText
 local stepTextOptions = { text = gameSceneData.stepCount, fontSize = 15, font = "TR-909.ttf"}
 
@@ -73,8 +71,9 @@ local function createGameBoard(group)
 end
 
 
+
 -- Returns the Indexs of the Cells neighbouring a specific Cell.
-local function getCellsNeighbours(cellIndex)
+function getCellsNeighbours(cellIndex)
     local neighbours = {}
     
     local row, col = math.ceil(cellIndex / appData.gridSize), cellIndex % appData.gridSize
@@ -173,7 +172,7 @@ function startSimulation()
         end
 
         updateCellStates()   
-        timer.performWithDelay(1000 / appData.speed, simulationStep) 
+        timer.performWithDelay(500 / appData.speed, simulationStep) 
 
     end
 
@@ -242,7 +241,7 @@ function scene:show(event)
         createGameBoard(sceneGroup)
     elseif phase == "did" then
         -- Called when the scene is now on screen
-        print("--- Unit tests start here ---")
+        print("--- Game Scene Unit Tests Start Here ---")
         lunatest.suite("unit-tests") 
         lunatest.run()
     end
